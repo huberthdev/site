@@ -4,7 +4,7 @@ import sqlite3
 import os
 
 app = Flask(__name__)
-CORS(app)  # Adiciona a configuração do CORS
+CORS(app, resources={r"/api/*": {"origins": "*"}})  # Adiciona a configuração do CORS
 
 # Criação da base de dados
 def init_sqlite_db():

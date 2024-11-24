@@ -9,7 +9,7 @@ document.getElementById('frmMain').addEventListener('submit', function(event) {
     };
 
     // Envia a requisição para o servidor
-    fetch('http://127.0.0.1:5000/api/cotacao', {
+    fetch('/api/cotacao', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
