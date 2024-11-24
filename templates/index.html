@@ -7,7 +7,7 @@
     <meta name="keywords" content="energia solar, orçamento, sistemas solares, servhidel, soluções sustentáveis">
     <meta name="author" content="Servhidel">
     <title>Servhidel - Sistemas de Energia Solar</title>
-    <link rel="stylesheet" href="static/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
@@ -33,17 +33,18 @@
             <div class="slider-wrapper">
                 <ul class="slider">
                     <li class="slide">
-                        <img class="carousel-slide-img" src="../icons/img1.jpg" alt="Imagem 1">
+                        <img class="carousel-slide-img" src="{{ url_for('static', filename='icons/img1.jpg') }}" alt="Imagem 1">
                     </li>
                     <li class="slide">
-                        <img class="carousel-slide-img" src="icons/img2.jpg" alt="Imagem 2">
+                        <img class="carousel-slide-img" src="{{ url_for('static', filename='icons/img2.jpg') }}" alt="Imagem 2">
                     </li>
                     <li class="slide">
-                        <img class="carousel-slide-img" src="icons/img3.jpg" alt="Imagem 3">
+                        <img class="carousel-slide-img" src="{{ url_for('static', filename='icons/img3.jpg') }}" alt="Imagem 3">
                     </li>
                     <li class="slide">
-                        <img class="carousel-slide-img" src="icons/img4.jpg" alt="Imagem 4">
+                        <img class="carousel-slide-img" src="{{ url_for('static', filename='icons/img4.jpg') }}" alt="Imagem 4">
                     </li>
+                    
                 </ul>
             </div>
             <!-- Controles -->
@@ -120,7 +121,7 @@
         <p>Por favor, habilite o JavaScript para aproveitar todos os recursos do site.</p>
     </noscript>
 
-    <script src="static/scripts.js"></script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 
 </body>
 </html>
