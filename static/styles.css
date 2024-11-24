@@ -533,7 +533,7 @@ footer a:hover {
     color: #fff;
 }
 
-/* Estilo geral */
+/* Ajuste geral */
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
@@ -542,61 +542,71 @@ body {
     color: #f4f4f9;
 }
 
-/* Responsividade para o container */
+/* Ajuste do container */
 .container {
-    padding: 15px;
-    margin: 10px auto;
-    width: 90%;
+    padding: 10px;
+    margin: 5px auto;
+    width: 95%;
     max-width: 1200px;
     background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Ajuste do cabeçalho */
 header {
     text-align: center;
-    padding: 15px;
+    padding: 10px;
     background: #001a33;
     border-bottom: 2px solid #ff851b;
 }
 
 header h1 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     color: #ff851b;
+    word-break: break-word; /* Quebra palavras grandes */
 }
 
-/* Ajuste para a tabela */
+/* Tabela compacta */
 table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.9rem;
-    margin: 15px 0;
+    font-size: 0.8rem;
+    margin: 10px 0;
 }
 
 table th, table td {
-    padding: 10px;
+    padding: 8px;
     text-align: left;
     border: 1px solid #ddd;
 }
 
-/* Ajuste para a paginação */
+table th {
+    font-size: 0.9rem;
+}
+
+table tbody tr:hover {
+    background: #ff851b;
+    color: #fff;
+}
+
+/* Paginação mais compacta */
 .pagination {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 15px;
+    margin-top: 10px;
+    gap: 5px; /* Espaçamento entre botões */
 }
 
 .pagination button {
     background-color: #001f3f;
     color: #fff;
     border: none;
-    padding: 10px 15px;
-    margin: 0 5px;
+    padding: 5px 10px;
     border-radius: 5px;
+    font-size: 0.8rem;
     cursor: pointer;
-    font-size: 0.9rem;
 }
 
 .pagination button:disabled {
@@ -604,12 +614,13 @@ table th, table td {
     cursor: not-allowed;
 }
 
-/* Ajuste para o rodapé */
+/* Rodapé compacto */
 footer {
     text-align: center;
-    padding: 10px;
+    padding: 5px;
     background: #001a33;
     color: #fff;
+    font-size: 0.8rem;
     border-top: 2px solid #ff851b;
 }
 
@@ -619,31 +630,15 @@ footer a {
     font-weight: bold;
 }
 
-/* Media queries para dispositivos menores */
+/* Responsividade para telas menores */
 @media (max-width: 768px) {
-    header h1 {
-        font-size: 1.5rem;
-    }
-
-    table th, table td {
-        padding: 8px;
-        font-size: 0.8rem;
-    }
-
-    .pagination button {
-        padding: 8px 10px;
-        font-size: 0.8rem;
-    }
-}
-
-@media (max-width: 480px) {
     header h1 {
         font-size: 1.2rem;
     }
 
     table th, table td {
+        padding: 6px;
         font-size: 0.7rem;
-        padding: 5px;
     }
 
     .pagination button {
@@ -652,6 +647,47 @@ footer a {
     }
 
     footer {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1rem;
+    }
+
+    table th, table td {
+        padding: 4px;
+        font-size: 0.6rem;
+    }
+
+    .pagination button {
+        font-size: 0.6rem;
+        padding: 4px 6px;
+    }
+
+    footer {
+        font-size: 0.6rem;
+    }
+}
+
+/* Extra: Ajustes para telas abaixo de 360px */
+@media (max-width: 360px) {
+    header h1 {
         font-size: 0.8rem;
+    }
+
+    table th, table td {
+        font-size: 0.5rem;
+        padding: 3px;
+    }
+
+    .pagination button {
+        font-size: 0.5rem;
+        padding: 3px 5px;
+    }
+
+    footer {
+        font-size: 0.5rem;
     }
 }
