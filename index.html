@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Servhidel é especializada em sistemas de energia solar. Solicite seu orçamento de forma rápida e eficiente.">
+    <meta name="keywords" content="energia solar, orçamento, sistemas solares, servhidel, soluções sustentáveis">
+    <meta name="author" content="Servhidel">
+    <title>Servhidel - Sistemas de Energia Solar</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="menu-bar">
+            <div class="social-icons">
+                <a href="https://www.threads.net/@servhidel?xmt=AQGzCf02T7xXc6cPVoaVf9i0Ty4P826_vt_FytZLcMuFg7Y" target="_blank" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://wa.me/+5534997754294" target="_blank" aria-label="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
+        </div> 
+    </header>    
+
+    <div class="carousel-root">
+        <div class="carousel-slider">
+            <div class="slider-wrapper">
+                <ul class="slider">
+                    <li class="slide">
+                        <img class="carousel-slide-img" src="icons/img1.jpg" alt="Imagem 1">
+                    </li>
+                    <li class="slide">
+                        <img class="carousel-slide-img" src="icons/img2.jpg" alt="Imagem 2">
+                    </li>
+                    <li class="slide">
+                        <img class="carousel-slide-img" src="icons/img3.jpg" alt="Imagem 3">
+                    </li>
+                    <li class="slide">
+                        <img class="carousel-slide-img" src="icons/img4.jpg" alt="Imagem 4">
+                    </li>
+                </ul>
+            </div>
+            <!-- Controles -->
+            <button class="control-arrow control-prev" aria-label="Slide anterior">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="control-arrow control-next" aria-label="Próximo slide">
+                <i class="fas fa-chevron-right"></i>
+            </button>            
+            <!-- Indicadores -->
+            <ul class="control-dots">
+                <li class="dot" data-index="0"></li>
+                <li class="dot" data-index="1"></li>
+                <li class="dot" data-index="2"></li>
+                <li class="dot" data-index="3"></li>
+            </ul>
+        </div>
+    </div> 
+
+    <!-- Formulário de Orçamento -->
+    <section class="form-section">
+        <form id="frmMain">
+
+            <h2>Solicite um Orçamento</h2>
+
+            <label for="name">Nome:</label>
+            <input type="text" id="name" name="name" required>
+    
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+    
+            <label for="phone">Telefone:</label>
+            <input type="tel" id="phone" name="phone" placeholder="(34) 99999-9999" required pattern="\(\d{2}\) \d{4,5}-\d{4}" title="Formato: (34) 99999-9999">
+    
+            <label for="description">Descrição:</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
+    
+            <button type="submit">Solicitar Orçamento</button>
+        </form>
+    </section>
+    
+    <!-- Modal de Sucesso -->
+    <div id="successModal" class="modal" aria-hidden="true">
+        <div class="modal-content">
+            <span class="close" aria-label="Fechar modal">&times;</span>
+            <p>Orçamento solicitado com sucesso!</p>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-text">
+                <p><strong>Servhidel</strong> é uma empresa dedicada à venda e instalação de sistemas de energia solar, proporcionando soluções sustentáveis e eficientes para os nossos clientes. Nossa missão é contribuir para um futuro mais limpo e ecológico.</p>
+            </div>
+            <div class="footer-links">
+                <p>Siga-nos nas redes sociais:</p>
+                <div class="social-icons">
+                    <a href="https://www.threads.net/@servhidel?xmt=AQGzCf02T7xXc6cPVoaVf9i0Ty4P826_vt_FytZLcMuFg7Y" target="_blank" class="social-icon instagram">
+                        <i class="fab fa-instagram"></i>
+                        @servhidel
+                    </a>
+                    <a href="https://wa.me/+5534997754294" target="_blank" class="social-icon whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                        (34) 99775-4294
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <noscript>
+        <p>Por favor, habilite o JavaScript para aproveitar todos os recursos do site.</p>
+    </noscript>
+
+    <script src="scripts.js"></script>
+
+</body>
+</html>
