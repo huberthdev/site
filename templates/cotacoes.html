@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Cotações</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to bottom, #001f3f, #001a33);
+            color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #001a33;
+            border-bottom: 2px solid #ff851b;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            color: #ff851b;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #001f3f;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table thead {
+            background: #001f3f;
+            color: #fff;
+        }
+
+        table th, table td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:nth-child(odd) {
+            background-color: #f4f4f9;
+        }
+
+        table th {
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        table tbody tr:hover {
+            background: #ff851b;
+            color: #fff;
+        }
+
+        .loading {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: #001a33;
+            color: #fff;
+            border-top: 2px solid #ff851b;
+        }
+
+        footer a {
+            color: #ff851b;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Servhidel - Lista de Cotações</h1>
+    </header>
+    <div class="container">
+        <h2>Cotações Recebidas</h2>
+        <div id="content">
+            <p class="loading">Carregando dados...</p>
+        </div>
+    </div>
+    <footer>
+        <p>© 2024 Servhidel. Desenvolvido com 💡 por <a href="#">Você</a>.</p>
+    </footer>
+
+    <script>
+        fetch('https://cryptic-bayou-16474-4b14b084c6c5.herokuapp.com/api/cotacoes')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar os dados.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.length === 0) {
+                    document.getElementById('content').innerHTML = '<p>Nenhuma cotação encontrada.</p>';
+                    return;
+                }
+
+                const table = document.createElement('table');
+                table.innerHTML = `
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Telefone</th>
+                            <th>Descrição</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${data.map(row => `
+                            <tr>
+                                <td>${row.id}</td>
+                                <td>${row.name}</td>
+                                <td>${row.email}</td>
+                                <td>${row.phone}</td>
+                                <td>${row.description}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                `;
+
+                document.getElementById('content').innerHTML = '';
+                document.getElementById('content').appendChild(table);
+            })
+            .catch(error => {
+                document.getElementById('content').innerHTML = `<p class="loading">${error.message}</p>`;
+            });
+    </script>
+</body>
+</html>

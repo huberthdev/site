@@ -68,6 +68,16 @@ def listar_cotacoes():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route('/cotacoes')
+def cotacoes():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM cotacao")
+    cotacoes = cursor.fetchall()
+    conn.close()
+    
+    return render_template('cotacoes.html', cotacoes=cotacoes)
+
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))  # Aqui, 5000 é o valor default

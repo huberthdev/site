@@ -11,7 +11,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Cabeçalho -->
+    <!-- Cabeçalho com Menu de Navegação -->
     <header>
         <div class="social-bar">
             <div class="social-icons">
@@ -23,9 +23,18 @@
                 </a>
             </div>
         </div>
+
         <div class="menu-bar">
             <img src="{{ url_for('static', filename='icons/banner.jpg') }}" alt="Banner" class="menu-banner">
-        </div> 
+        </div>
+
+        <!-- Menu de navegação -->
+        <nav class="navbar">
+            <ul class="nav-list">
+                <li><a href="/">Início</a></li>
+                <li><a href="/cotacoes">Cotações</a></li>
+            </ul>
+        </nav>
     </header>    
 
     <div class="carousel-root">
@@ -44,7 +53,6 @@
                     <li class="slide">
                         <img class="carousel-slide-img" src="{{ url_for('static', filename='icons/img4.jpg') }}" alt="Imagem 4">
                     </li>
-                    
                 </ul>
             </div>
             <!-- Controles -->
@@ -67,9 +75,7 @@
     <!-- Formulário de Orçamento -->
     <section class="form-section">
         <form id="frmMain">
-
             <h2>Solicite um Orçamento</h2>
-
             <label for="name">Nome:</label>
             <input type="text" id="name" name="name" required>
     
@@ -85,7 +91,15 @@
             <button type="submit">Solicitar Orçamento</button>
         </form>
     </section>
-    
+
+    <!-- Seção de Cotações -->
+    <section class="cotacoes-section">
+        <h2>Cotações Recebidas</h2>
+        <div id="cotacoes-content">
+            <p class="loading">Carregando cotações...</p>
+        </div>
+    </section>
+
     <!-- Modal de Sucesso -->
     <div id="successModal" class="modal" aria-hidden="true">
         <div class="modal-content">
