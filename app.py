@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import sqlite3
 import os
@@ -15,6 +15,10 @@ def init_sqlite_db():
     conn.close()
 
 init_sqlite_db()
+
+@app.route('/')
+def home():
+    return render_template('index.html')  # Aqui estamos retornando a página inicial (index.html)
 
 @app.route('/api/cotacao', methods=['POST'])
 def criar_cotacao():
@@ -45,4 +49,3 @@ def criar_cotacao():
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))  # Aqui, 5000 é o valor default
     app.run(host="0.0.0.0", port=port)
-
