@@ -134,3 +134,15 @@ window.onload = function () {
         window.history.replaceState({}, document.title, baseUrl);
     }
 };
+
+let lastScrollY = window.scrollY;
+
+window.addEventListener('scroll', () => {
+    const socialBar = document.querySelector('.social-bar');
+    if (window.scrollY > lastScrollY) {
+        socialBar.classList.add('hidden'); // Esconde ao rolar para baixo
+    } else {
+        socialBar.classList.remove('hidden'); // Mostra ao rolar para cima
+    }
+    lastScrollY = window.scrollY;
+});
