@@ -46,6 +46,29 @@ def criar_cotacao():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route('/api/cotacoes', methods=['GET'])
+def listar_cotacoes():
+    try:
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT * FROM cotacao")
+        rows = cursor.fetchall()
+
+        # Estruturação dos dados como uma lista de dicionários
+        cotacoes = [
+            {"id": row[0], "name": row[1], "email": row[2], "phone": row[3], "description": row[4]}
+            for row in rows
+        ]
+
+        cursor.close()
+        conn.close()
+
+        return jsonify(cotacoes), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))  # Aqui, 5000 é o valor default
     app.run(host="0.0.0.0", port=port)
