@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, jsonify, render_template
+from flask import Flask, request, redirect, jsonify, render_template, session, flash
 from flask_cors import CORS
 import psycopg2
 import os
@@ -12,6 +12,7 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO)
 
 app = Flask(__name__)
+app.secret_key = "chave_secreta_para_sessao"  # Para sessões
 CORS(app, resources={r"/api/*": {"origins": "https://www.servhidel.com.br"}})  # Restrição de CORS
 
 # Configurações do PostgreSQL
@@ -34,22 +35,37 @@ def get_db_connection():
     )
 
 def init_db():
-    """Cria a tabela cotacao se ela não existir."""
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS cotacao (
-            id SERIAL PRIMARY KEY,
-            name VARCHAR(255) NOT NULL,
-            email VARCHAR(255) NOT NULL,
-            phone VARCHAR(255) NOT NULL,
-            description TEXT NOT NULL,
-            status INTEGER
-        );
-    """)
-    conn.commit()
-    cursor.close()
-    conn.close()
+    """Inicializa o banco de dados, criando tabelas se necessário."""
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        # Criação da tabela de cotações
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS cotacao (
+                id SERIAL PRIMARY KEY,
+                name VARCHAR(255) NOT NULL,
+                email VARCHAR(255) NOT NULL,
+                phone VARCHAR(255) NOT NULL,
+                description TEXT NOT NULL,
+                status INTEGER
+            );
+        """)
+
+        # Criação da tabela de usuários
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS usuarios (
+                id SERIAL PRIMARY KEY,
+                usuario VARCHAR(255) NOT NULL UNIQUE,
+                senha VARCHAR(255) NOT NULL,
+                nivel INTEGER NOT NULL
+            );
+        """)
+        conn.commit()
+        cursor.close()
+        conn.close()
+    except psycopg2.Error as e:
+        logging.error(f"Erro ao inicializar o banco de dados: {e}")
 
 @app.before_request
 def handle_redirects():
@@ -59,9 +75,106 @@ def handle_redirects():
     if not request.is_secure and 'HEROKU' in os.environ:
         return redirect(request.url.replace("http://", "https://"), code=301)
 
+# Página inicial
 @app.route('/')
 def home():
     return render_template('index.html')
+
+# Página de login
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        usuario = request.form.get('usuario')
+        senha = request.form.get('senha')
+
+        try:
+            conn = get_db_connection()
+            cursor = conn.cursor()
+
+            # Consulta para validar a combinação de usuário e senha
+            cursor.execute("SELECT id, nivel, usuario FROM usuarios WHERE usuario = %s AND senha = %s", (usuario, senha))
+            user = cursor.fetchone()
+
+            if user:
+                session['user_id'] = user[0]
+                session['nivel'] = user[1]
+
+                # Extrai o primeiro nome antes do ponto e formata com a primeira letra maiúscula
+                primeiro_nome = user[2].split('.')[0].capitalize()
+                session['username'] = primeiro_nome  # Salva o nome formatado na sessão
+
+                # Redireciona com base no nível de acesso
+                if user[1] == 1:  # Administrador
+                    return redirect('/')
+                elif user[1] == 2:  # Usuário
+                    return redirect('/')
+                else:
+                    flash("Nível de acesso inválido.", "error")
+                    return redirect('/login')
+            else:
+                flash("Usuário ou senha incorretos.", "error")
+
+        except psycopg2.Error as e:
+            logging.error(f"Erro no banco de dados: {e}")
+            flash("Erro no banco de dados. Tente novamente mais tarde.", "error")
+        finally:
+            cursor.close()
+            conn.close()
+
+    return render_template('login.html')
+
+# Rota para logout
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/')
+
+# Página do admin
+@app.route('/admin')
+def admin():
+    if session.get('nivel') == 1:
+        return render_template('admin.html')
+    return redirect('/login')
+
+# Página do usuário
+@app.route('/user')
+def user():
+    if session.get('nivel') == 2:
+        return render_template('user.html')
+    return redirect('/login')
+
+@app.route('/cotacoes')
+def cotacoes():
+    if 'user_id' not in session:
+        flash("Você precisa estar logado para acessar esta página.", "error")
+        return redirect('/login')
+    
+    if session.get('nivel') != 1:
+        flash("Você não tem permissão para acessar esta página.", "error")
+        return redirect('/')
+
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        # Consulta ao banco de dados
+        cursor.execute("SELECT * FROM cotacao")
+        cotacoes = cursor.fetchall()
+
+        # Fechar conexão
+        cursor.close()
+        conn.close()
+
+        # Renderizar os dados
+        return render_template('cotacoes.html', cotacoes=cotacoes)
+    except psycopg2.Error as e:
+        logging.error(f"Erro no banco de dados: {e}")
+        flash("Erro ao buscar os dados do banco de dados.", "error")
+        return render_template('error.html', error="Erro ao acessar os dados.")
+    except Exception as e:
+        logging.error(f"Erro geral: {e}")
+        flash("Erro inesperado ao buscar os dados.", "error")
+        return render_template('error.html', error=str(e))
 
 @app.route('/api/cotacao', methods=['POST'])
 def criar_cotacao():
@@ -133,25 +246,12 @@ def listar_cotacoes():
         logging.error(f"Erro geral: {e}")
         return jsonify({"error": str(e)}), 500
 
-@app.route('/cotacoes')
-def cotacoes():
-    try:
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        cursor.execute("SELECT * FROM cotacao")
-        cotacoes = cursor.fetchall()
-        conn.close()
-
-        return render_template('cotacoes.html', cotacoes=cotacoes)
-    except psycopg2.Error as e:
-        logging.error(f"Erro no banco de dados: {e}")
-        return render_template('error.html', error="Erro ao acessar o banco de dados")
-    except Exception as e:
-        logging.error(f"Erro geral: {e}")
-        return render_template('error.html', error=str(e))
+# Adicione o nome do usuário nos templates
+@app.context_processor
+def inject_user():
+    return {'username': session.get('username', '')}
 
 if __name__ == '__main__':
-    # Chama a função de inicialização do banco antes de rodar o servidor
     init_db()
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)

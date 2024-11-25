@@ -27,9 +27,19 @@
         <!-- Menu de navegação -->
         <nav class="navbar">
             <ul class="nav-list">
-                <li><a href="/login">Login</a></li>
-                <li><a href="/">Início</a></li>
-                <li><a href="/cotacoes">Cotações</a></li>
+                {% if session.get('user_id') %}
+                    <li class="user-name">
+                        <span>Olá, {{ username }}!</span>
+                    </li>
+                    <li><a href="/logout">Logout</a></li>
+                    {% if session.get('nivel') == 1 %}
+                        <li><a href="/cotacoes">Cotações</a></li>
+                    {% elif session.get('nivel') == 2 %}
+                        <li><a href="/user">Acompanhar meu Projeto</a></li>
+                    {% endif %}
+                {% else %}
+                    <li><a href="/login">Login</a></li>
+                {% endif %}
             </ul>
         </nav>
 

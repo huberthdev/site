@@ -49,6 +49,23 @@
             font-size: 24px;
         }
 
+        .alert {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .alert.error {
+            background: #ff6b6b;
+            color: #fff;
+        }
+
+        .alert.success {
+            background: #2ecc71;
+            color: #fff;
+        }
+
         .form-group {
             margin-bottom: 15px;
         }
@@ -110,29 +127,29 @@
         /* Media queries para telas menores */
         @media (max-width: 480px) {
             .container {
-                padding: 15px; /* Reduz o padding interno */
+                padding: 15px;
             }
 
             .logo img {
-                max-width: 60px; /* Reduz ainda mais o tamanho da logo */
+                max-width: 60px;
             }
 
             .container h1 {
-                font-size: 20px; /* Diminui o tamanho do título */
+                font-size: 20px;
             }
 
             .form-group input {
-                font-size: 14px; /* Diminui o tamanho do texto nos campos */
-                padding: 8px; /* Reduz o padding dos campos */
+                font-size: 14px;
+                padding: 8px;
             }
 
             .btn {
-                font-size: 14px; /* Diminui o tamanho do texto no botão */
-                padding: 8px; /* Reduz o padding do botão */
+                font-size: 14px;
+                padding: 8px;
             }
 
             .footer {
-                font-size: 12px; /* Reduz o tamanho do texto no rodapé */
+                font-size: 12px;
             }
         }
     </style>
@@ -143,6 +160,18 @@
             <img src="../static/icons/logo.jpg" alt="Logo da Empresa">
         </div>
         <h1>Login</h1>
+
+        <!-- Exibe mensagens flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div>
+                {% for category, message in messages %}
+                <div class="alert {{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+
         <form action="/login" method="POST">
             <div class="form-group">
                 <label for="usuario">Usuário</label>
@@ -154,9 +183,6 @@
             </div>
             <button type="submit" class="btn">Entrar</button>
         </form>
-        <div class="footer">
-            <p>Esqueceu a senha? <a href="#">Recupere aqui</a></p>
-        </div>
     </div>
 </body>
 </html>

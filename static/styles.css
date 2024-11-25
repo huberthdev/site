@@ -691,3 +691,10 @@ footer a {
         font-size: 0.5rem;
     }
 }
+
+.user-name {
+    float: left;
+    margin-right: 20px;
+    font-size: 16px;
+    color: #fff;
+}
