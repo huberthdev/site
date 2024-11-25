@@ -68,7 +68,7 @@ def criar_cotacao():
         cursor.close()
         conn.close()
 
-        return jsonify({"message": "Orçamento solicitado com sucesso!"}), 201
+        return jsonify({"message": "Orçamento solicitado com sucesso!\n\nEntraremos em contato em breve."}), 201
     except sqlite3.Error as e:
         logging.error(f"Erro no banco de dados: {e}")
         return jsonify({"error": "Erro no banco de dados"}), 500
