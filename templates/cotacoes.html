@@ -34,7 +34,8 @@
 
         // Função para carregar as cotações e aplicar a paginação
         function loadData(page) {
-            fetch('https://cryptic-bayou-16474-4b14b084c6c5.herokuapp.com/api/cotacoes')
+            // Requisição para o servidor Flask com a paginação
+            fetch(`/api/cotacoes?page=${page}&per_page=${rowsPerPage}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Erro ao buscar os dados.');
@@ -42,9 +43,9 @@
                     return response.json();
                 })
                 .then(fetchedData => {
-                    data = fetchedData;
+                    data = fetchedData.cotacoes;  // Cotações da página atual
                     renderTable(page);
-                    updatePagination(page);
+                    updatePagination(page, fetchedData.total);  // Passa total de cotações
                 })
                 .catch(error => {
                     document.getElementById('content').innerHTML = `<p class="loading">${error.message}</p>`;
@@ -85,8 +86,8 @@
         }
 
         // Função para atualizar a paginação
-        function updatePagination(page) {
-            const totalPages = Math.ceil(data.length / rowsPerPage);
+        function updatePagination(page, totalRecords) {
+            const totalPages = Math.ceil(totalRecords / rowsPerPage);
 
             document.getElementById('pageNum').innerText = `Página ${page}`;
 
