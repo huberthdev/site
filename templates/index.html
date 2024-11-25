@@ -31,7 +31,7 @@
                     <li class="user-name">
                         <span>Olá, {{ username }}!</span>
                     </li>
-                    <li><a href="/logout">Logout</a></li>
+                    <li><a href="/logout">Sair</a></li>
                     {% if session.get('nivel') == 1 %}
                         <li><a href="/cotacoes">Cotações</a></li>
                     {% elif session.get('nivel') == 2 %}
