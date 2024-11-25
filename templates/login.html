@@ -20,6 +20,7 @@
             justify-content: center;
             background: linear-gradient(to bottom, #001f3f, #001a33);
             color: #fff;
+            padding: 10px;
         }
 
         .container {
@@ -29,19 +30,21 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             width: 100%;
             max-width: 400px;
-            text-align: center;
         }
 
         .logo {
             margin-bottom: 20px;
+            text-align: center;
         }
 
         .logo img {
-            max-width: 150px; /* Ajusta o tamanho da imagem */
+            max-width: 80px;
             height: auto;
+            border-radius: 50%;
         }
 
         .container h1 {
+            text-align: center;
             margin-bottom: 20px;
             font-size: 24px;
         }
@@ -54,6 +57,7 @@
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
+            text-align: left;
         }
 
         .form-group input {
@@ -88,7 +92,7 @@
         }
 
         .footer {
-            text-align: center;
+            text-align: left;
             margin-top: 20px;
             font-size: 14px;
             color: #aaa;
@@ -102,13 +106,41 @@
         .footer a:hover {
             text-decoration: underline;
         }
+
+        /* Media queries para telas menores */
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px; /* Reduz o padding interno */
+            }
+
+            .logo img {
+                max-width: 60px; /* Reduz ainda mais o tamanho da logo */
+            }
+
+            .container h1 {
+                font-size: 20px; /* Diminui o tamanho do título */
+            }
+
+            .form-group input {
+                font-size: 14px; /* Diminui o tamanho do texto nos campos */
+                padding: 8px; /* Reduz o padding dos campos */
+            }
+
+            .btn {
+                font-size: 14px; /* Diminui o tamanho do texto no botão */
+                padding: 8px; /* Reduz o padding do botão */
+            }
+
+            .footer {
+                font-size: 12px; /* Reduz o tamanho do texto no rodapé */
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="logo">
             <img src="../static/icons/logo.jpg" alt="Logo da Empresa">
-             
         </div>
         <h1>Login</h1>
         <form action="/login" method="POST">
