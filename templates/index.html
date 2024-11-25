@@ -24,17 +24,19 @@
             </div>
         </div>
 
-        <div class="menu-bar">
-            <img src="{{ url_for('static', filename='icons/banner.jpg') }}" alt="Banner" class="menu-banner">
-        </div>
-
         <!-- Menu de navegação -->
         <nav class="navbar">
             <ul class="nav-list">
+                <li><a href="/login">Login</a></li>
                 <li><a href="/">Início</a></li>
                 <li><a href="/cotacoes">Cotações</a></li>
             </ul>
         </nav>
+
+        <div class="menu-bar">
+            <img src="{{ url_for('static', filename='icons/banner.jpg') }}" alt="Banner" class="menu-banner">
+        </div>
+
     </header>    
 
     <div class="carousel-root">
