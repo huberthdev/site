@@ -11,16 +11,16 @@ app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "https://www.servhidel.com.br"}})  # Restrição de CORS
 
 @app.before_request
-def redirect_www():
-    """Redireciona qualquer acesso ao domínio raiz para o subdomínio www."""
+def handle_redirects():
+    """Redireciona para www e força HTTPS."""
+    # Redireciona para www.servhidel.com.br
     if request.host == 'servhidel.com.br':
         return redirect('https://www.servhidel.com.br' + request.full_path, code=301)
-
-@app.before_request
-def enforce_https():
-    """Garante que todas as requisições sejam feitas via HTTPS."""
+    
+    # Garante HTTPS
     if not request.is_secure and 'HEROKU' in os.environ:
         return redirect(request.url.replace("http://", "https://"), code=301)
+
 
 # Função para inicializar o banco de dados SQLite
 def init_sqlite_db():
