@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Cotações</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Servhidel - Lista de Cotações</h1>
+    </header>
+    <div class="container">
+        <h2>Cotações Recebidas</h2>
+        <div id="content">
+            <p class="loading">Carregando dados...</p>
+        </div>
+        <!-- Paginação -->
+        <div id="pagination" class="pagination">
+            <button id="prevBtn" onclick="changePage(-1)" disabled>Anterior</button>
+            <span id="pageNum">Página 1</span>
+            <button id="nextBtn" onclick="changePage(1)">Próximo</button>
+        </div>
+    </div>
+    <footer>
+        <p>© 2024 Servhidel. Desenvolvido por <a href="https://wa.me/+553498961104" target="_blank">Huberth Silva</a>.</p>
+    </footer>    
+
+    <script>
+        const rowsPerPage = 10; // Número de cotações por página
+        let currentPage = 1;
+        let data = []; // Para armazenar todas as cotações
+
+        // Função para carregar as cotações e aplicar a paginação
+        function loadData(page) {
+            // Requisição para o servidor Flask com a paginação
+            fetch(`/api/cotacoes?page=${page}&per_page=${rowsPerPage}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao buscar os dados.');
+                    }
+                    return response.json();
+                })
+                .then(fetchedData => {
+                    data = fetchedData.cotacoes;  // Cotações da página atual
+                    renderTable(page);
+                    updatePagination(page, fetchedData.total);  // Passa total de cotações
+                })
+                .catch(error => {
+                    document.getElementById('content').innerHTML = `<p class="loading">${error.message}</p>`;
+                });
+        }
+
+        // Função para renderizar os dados na tabela
+        function renderTable(page) {
+            const start = (page - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            const pageData = data.slice(start, end);
+
+            const table = document.createElement('table');
+            table.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${pageData.map(row => `
+                        <tr>
+                            <td>${row.id}</td>
+                            <td>${row.name}</td>
+                            <td>${row.email}</td>
+                            <td>${row.phone}</td>
+                            <td>${row.description}</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            `;
+            document.getElementById('content').innerHTML = '';
+            document.getElementById('content').appendChild(table);
+        }
+
+        // Função para atualizar a paginação
+        function updatePagination(page, totalRecords) {
+            const totalPages = Math.ceil(totalRecords / rowsPerPage);
+
+            document.getElementById('pageNum').innerText = `Página ${page}`;
+
+            document.getElementById('prevBtn').disabled = page === 1;
+            document.getElementById('nextBtn').disabled = page === totalPages;
+        }
+
+        // Função para navegar entre as páginas
+        function changePage(direction) {
+            currentPage += direction;
+            loadData(currentPage);
+        }
+
+        // Carregar os dados iniciais
+        loadData(currentPage);
+    </script>
+</body>
+</html>

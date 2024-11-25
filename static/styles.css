@@ -1,0 +1,693 @@
+/* Barra Social à Esquerda */
+.social-bar {
+    position: fixed;
+    top: 50%; /* Fixa no meio da tela verticalmente */
+    left: 0;
+    transform: translateY(-50%); /* Centra verticalmente */
+    display: flex;
+    flex-direction: column; /* Organiza os ícones na vertical */
+    gap: 15px; /* Espaçamento entre os ícones */
+    padding: 10px; /* Espaçamento interno */
+    z-index: 1000; /* Garante que a barra fique sobre os outros elementos */
+}
+
+.social-icons {
+    display: flex;
+    flex-direction: column; /* Ícones na vertical */
+    gap: 15px; /* Espaçamento entre os ícones */
+}
+
+.social-icons a {
+    width: 50px;
+    height: 50px;
+    background-color: #ffffff; /* Fundo branco para os ícones */
+    border-radius: 50%; /* Ícones circulares */
+    font-size: 1.8rem; /* Tamanho maior para os ícones */
+    color: #001f3f; /* Cor do ícone */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, transform 0.3s; /* Efeito suave ao passar o mouse */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.social-icons a:hover {
+    background-color: #ffcc00; /* Cor de fundo ao passar o mouse */
+    color: #001a33; /* Cor do ícone ao passar o mouse */
+    transform: scale(1.2); /* Aumenta o ícone ao passar o mouse */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra mais forte */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #001f3f, #001a33); /* Gradiente de azul escuro */
+    margin: 0;
+    padding: 0;
+    color: white; /* Define a cor do texto para garantir a legibilidade */
+}
+
+/* Atualização para o menu-bar */
+.menu-bar {
+    background-color: hsla(209, 100%, 10%, 0);
+    display: flex; /* Alinha os elementos no eixo horizontal */
+    justify-content: center; /* Centraliza o conteúdo no menu-bar */
+    align-items: center; /* Alinha verticalmente */
+    padding: 0; /* Remove o padding para que a imagem preencha todo o espaço */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destaque */
+    position: relative;
+    border-radius: 0; /* Garantir que não haja borda arredondada */
+}
+
+/* Estilização da imagem do menu */
+.menu-banner {
+    width: 100%; /* Faz com que a largura ocupe 100% do contêiner */
+    height: 100%; /* Faz com que a altura ocupe 100% do contêiner */
+    object-fit: cover; /* Faz a imagem cobrir todo o espaço disponível */
+    border-radius: 0; /* Garante que não haja borda arredondada na imagem */
+}
+
+
+
+/* Ícones sociais */
+.menu-bar .social-icons {
+    display: flex;
+    gap: 15px; /* Espaçamento entre os ícones */
+}
+
+.menu-bar .social-icons a {
+    font-size: 1.5rem;
+    color: #ffffff; /* Cor dos ícones */
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.menu-bar .social-icons a:hover {
+    color: #ffcc00; /* Cor de destaque ao passar o mouse */
+    transform: scale(1.2);
+}
+
+/* Estilos do Formulário */
+.form-section form {
+    background-color: rgba(255, 255, 255, 0.9); /* Fundo branco com transparência */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: black; /* Texto legível no fundo claro */
+    max-width: 1000px; /* Define um tamanho máximo para o formulário */
+    width: 100%; /* O formulário vai ocupar até o limite máximo */
+    margin: 50px auto; /* Centraliza o formulário e adiciona um espaço em cima e embaixo */
+    transition: all 0.3s ease; /* Suaviza qualquer transição de mudança */
+}
+
+.form-section form:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Sombra mais forte ao passar o mouse */
+}
+
+.form-section form h2 {
+    text-align: center;  /* Centraliza o título */
+    margin-bottom: 20px;  /* Dá um espaço abaixo do título */
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 768px) {
+    .form-section form {
+        padding: 15px; /* Diminui o padding em telas menores */
+        margin: 15px; /* Diminui a margem em telas menores */
+        max-width: 90%; /* Limita o tamanho para 90% da largura da tela */
+    }
+
+    .form-section form h2 {
+        font-size: 1.3em; /* Reduz o tamanho da fonte do título */
+    }
+}
+
+@media (max-width: 480px) {
+    .form-section form {
+        padding: 10px; /* Reduz ainda mais o padding para telas muito pequenas */
+        margin: 10px; /* Reduz a margem */
+        max-width: 90%; /* Mantém o formulário com largura de até 90% */
+    }
+
+    .form-section form h2 {
+        font-size: 1.1em; /* Ajuste adicional no tamanho do título */
+    }
+}
+
+
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+input, textarea {
+    resize: none;
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+input:focus, textarea:focus {
+    border-color: #001f3f; /* Foco com a cor do tema */
+    outline: none;
+}
+
+button {
+    background-color: #001f3f; /* Azul escuro */
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+button:hover, button:focus {
+    background-color: #005580; /* Azul mais claro */
+    outline: none;
+    transform: scale(1.05); /* Efeito de aumento */
+}
+
+/* Estilos do Rodapé */
+footer {
+    background-color: #001a33;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.footer-content p {
+    margin: 10px 0;
+}
+
+.footer-content a {
+    color: #FFA500; /* Cor laranja mais clara */
+    text-decoration: none;
+}
+
+/* Estilos do Modal */
+.modal {
+    display: none; /* Inicialmente oculta */
+    position: fixed;
+    z-index: 1000; /* Garantir que fique acima de outros conteúdos */
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* Fundo escurecido */
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+    background-color: #003366; /* Azul mais claro */
+    margin: auto;
+    padding: 30px;
+    border: 2px solid #ffffff;
+    width: 80%;
+    max-width: 400px; /* Limita o tamanho da modal */
+    text-align: center;
+    border-radius: 15px;
+    color: white;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Sombra suave */
+    animation: slideUp 0.5s ease-out;
+}
+
+.modal p {
+    font-size: 1.2rem; /* Tamanho do texto mais agradável */
+    margin: 15px 0;
+}
+
+.modal h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.modal button {
+    background-color: #FF9F00; /* Cor do botão mais destacada */
+    color: #003366; /* Cor do texto do botão */
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.modal button:hover {
+    background-color: #FFCC00; /* Cor de hover para o botão */
+    transform: scale(1.05); /* Efeito de aumento */
+}
+
+/* Estilo do botão de fechar */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Animação do Modal - Fade In */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Animação do Modal - Slide Up */
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Configurações básicas */
+.carousel-root {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: hwb(0 2% 4% / 0);
+}
+
+.carousel-slider {
+    position: relative;
+}
+
+.slider-wrapper {
+    width: 100%;
+    overflow: hidden;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.slide {
+    flex: 0 0 100%;
+    position: relative;
+}
+
+.carousel-slide-img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px; /* Bordas suaves nas imagens */
+}
+
+/* Controles (setas modernizadas) */
+.control-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.3); /* Fundo translúcido */
+    color: #fff;
+    border: none;
+    border-radius: 50%; /* Botão redondo */
+    font-size: 24px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.control-arrow:hover {
+    background: rgba(0, 0, 0, 0.6); /* Fundo mais escuro ao passar o mouse */
+    transform: translateY(-50%) scale(1.1); /* Efeito de zoom */
+}
+
+.control-prev {
+    left: 15px; /* Distância da borda esquerda */
+}
+
+.control-next {
+    right: 15px; /* Distância da borda direita */
+}
+
+/* Indicadores (dots modernizados) */
+.control-dots {
+    position: absolute;
+    bottom: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.8); /* Bordas brancas para maior destaque */
+    border-radius: 50%;
+    margin: 0 6px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.dot:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: scale(1.2); /* Zoom ao passar o mouse */
+}
+
+.dot.selected {
+    background: #fff; /* Destaque no dot selecionado */
+    transform: scale(1.3); /* Aumento no dot ativo */
+}
+
+/* Menu de Navegação */
+.navbar {
+    background-color: #001f3f;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-list li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+.nav-list a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.nav-list a:hover {
+    color: #ffab00;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to bottom, #001f3f, #001a33);
+    color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background-color: #001a33;
+    border-bottom: 2px solid #ff851b;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    color: #ff851b;
+    letter-spacing: 2px;
+}
+
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    background: #2e2e2e;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ff851b;
+    font-size: 1.8rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table thead {
+    background: #001f3f;
+    color: #fff;
+    font-weight: bold;
+}
+
+table th, table td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #444;
+}
+
+table tr:nth-child(even) {
+    background-color: #353535;
+}
+
+table tr:nth-child(odd) {
+    background-color: #2e2e2e;
+}
+
+table th {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+table tbody tr:hover {
+    background: #ff851b;
+    color: #fff;
+}
+
+.loading {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #ddd;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background: #001a33;
+    color: #fff;
+    border-top: 2px solid #ff851b;
+}
+
+footer a {
+    color: #ff851b;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #fff;
+}
+
+/* Ajuste geral */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #001f3f, #001a33);
+    color: #f4f4f9;
+}
+
+/* Ajuste do container */
+.container {
+    padding: 10px;
+    margin: 5px auto;
+    width: 95%;
+    max-width: 1200px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Ajuste do cabeçalho */
+header {
+    text-align: center;
+    padding: 10px;
+    background: #001a33;
+    border-bottom: 2px solid #ff851b;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    color: #ff851b;
+    word-break: break-word; /* Quebra palavras grandes */
+}
+
+/* Tabela compacta */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+    margin: 10px 0;
+}
+
+table th, table td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+table th {
+    font-size: 0.9rem;
+}
+
+table tbody tr:hover {
+    background: #ff851b;
+    color: #fff;
+}
+
+/* Paginação mais compacta */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    gap: 5px; /* Espaçamento entre botões */
+}
+
+.pagination button {
+    background-color: #001f3f;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.pagination button:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+}
+
+/* Rodapé compacto */
+footer {
+    text-align: center;
+    padding: 5px;
+    background: #001a33;
+    color: #fff;
+    font-size: 0.8rem;
+    border-top: 2px solid #ff851b;
+}
+
+footer a {
+    color: #ff851b;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.2rem;
+    }
+
+    table th, table td {
+        padding: 6px;
+        font-size: 0.7rem;
+    }
+
+    .pagination button {
+        font-size: 0.7rem;
+        padding: 5px 8px;
+    }
+
+    footer {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1rem;
+    }
+
+    table th, table td {
+        padding: 4px;
+        font-size: 0.6rem;
+    }
+
+    .pagination button {
+        font-size: 0.6rem;
+        padding: 4px 6px;
+    }
+
+    footer {
+        font-size: 0.6rem;
+    }
+}
+
+/* Extra: Ajustes para telas abaixo de 360px */
+@media (max-width: 360px) {
+    header h1 {
+        font-size: 0.8rem;
+    }
+
+    table th, table td {
+        font-size: 0.5rem;
+        padding: 3px;
+    }
+
+    .pagination button {
+        font-size: 0.5rem;
+        padding: 3px 5px;
+    }
+
+    footer {
+        font-size: 0.5rem;
+    }
+}
