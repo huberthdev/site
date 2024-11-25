@@ -135,14 +135,12 @@ window.onload = function () {
     }
 };
 
-let lastScrollY = window.scrollY;
+document.addEventListener("DOMContentLoaded", function () {
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navbar = document.querySelector(".navbar");
 
-window.addEventListener('scroll', () => {
-    const socialBar = document.querySelector('.social-bar');
-    if (window.scrollY > lastScrollY) {
-        socialBar.classList.add('hidden'); // Esconde ao rolar para baixo
-    } else {
-        socialBar.classList.remove('hidden'); // Mostra ao rolar para cima
-    }
-    lastScrollY = window.scrollY;
+    menuToggle.addEventListener("click", function () {
+        navbar.classList.toggle("active");
+    });
 });
+
