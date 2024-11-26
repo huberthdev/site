@@ -4,116 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <!-- Link para o Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* Estilos globais */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
-
         body {
             height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(to bottom, #001f3f, #001a33);
-            color: #fff;
-            padding: 10px;
+            background-color: #2d2d2d;
+            color: #e9ecef;
+            font-family: 'Roboto', sans-serif;
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;  /* Aumentando o padding para mais espaço dentro do container */
+            background-color: #343a40;
+            padding: 30px;
             border-radius: 12px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            width: 100%;
             max-width: 400px;
-        }
-
-        .logo {
-            margin-bottom: 20px;
-            text-align: center;
+            width: 100%;
         }
 
         .logo img {
-            max-width: 120px;  /* Aumentando o tamanho do logo */
+            max-width: 120px;
             height: auto;
             border-radius: 50%;
         }
 
-        .container h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 24px;
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .form-label {
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+            border-color: #007bff;
         }
 
         .alert {
-            padding: 10px;
-            margin-bottom: 15px;
             border-radius: 8px;
             font-weight: bold;
         }
 
         .alert.error {
-            background: #ff6b6b;
+            background-color: #dc3545;
             color: #fff;
         }
 
         .alert.success {
-            background: #2ecc71;
+            background-color: #28a745;
             color: #fff;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            text-align: left;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
-        }
-
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 12px;  /* Aumentando o padding do botão */
-            border: none;
-            border-radius: 8px;
-            background: #007bff;
-            color: #fff;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            margin-bottom: 20px;  /* Adicionando espaço abaixo do botão */
-        }
-
-        .btn:hover {
-            background: #0056b3;
-        }
-
-        .footer {
-            text-align: left;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #aaa;
         }
 
         .footer a {
@@ -124,67 +76,40 @@
         .footer a:hover {
             text-decoration: underline;
         }
-
-        /* Media queries para telas menores */
-        @media (max-width: 480px) {
-            .container {
-                padding: 20px;  /* Aumentando o padding para telas menores */
-            }
-
-            .logo img {
-                max-width: 90px;  /* Ajustando o tamanho do logo para telas menores */
-            }
-
-            .container h1 {
-                font-size: 20px;
-            }
-
-            .form-group input {
-                font-size: 14px;
-                padding: 8px;
-            }
-
-            .btn {
-                font-size: 14px;
-                padding: 10px;
-                margin-bottom: 20px;  /* Garantindo o espaço embaixo do botão em telas menores */
-            }
-
-            .footer {
-                font-size: 12px;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="logo">
+        <div class="logo text-center mb-3">
             <img src="../static/icons/logo.jpg" alt="Logo da Empresa">
         </div>
-        <h1>Login</h1>
+        <h1 class="text-center mb-4">Login</h1>
 
         <!-- Exibe mensagens flash -->
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <div>
                 {% for category, message in messages %}
-                <div class="alert {{ category }}">{{ message }}</div>
+                <div class="alert alert-{{ category }}">{{ message }}</div>
                 {% endfor %}
             </div>
         {% endif %}
         {% endwith %}
 
         <form action="/login" method="POST">
-            <div class="form-group">
-                <label for="usuario">Usuário</label>
-                <input type="text" id="usuario" name="usuario" placeholder="Digite seu usuário" required>
+            <div class="mb-3">
+                <label for="usuario" class="form-label">Usuário</label>
+                <input type="text" id="usuario" name="usuario" class="form-control" placeholder="Digite seu usuário" required>
             </div>
-            <div class="form-group">
-                <label for="senha">Senha</label>
-                <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+            <div class="mb-4">
+                <label for="senha" class="form-label">Senha</label>
+                <input type="password" id="senha" name="senha" class="form-control" placeholder="Digite sua senha" required>
             </div>
-            <button type="submit" class="btn">Entrar</button>
+            <button type="submit" class="btn btn-primary w-100">Entrar</button>
         </form>
     </div>
+
+    <!-- Link para o Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
