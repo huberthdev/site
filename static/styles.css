@@ -32,7 +32,7 @@
 }
 
 .social-icons a:hover {
-    background-color: #ffcc00; /* Cor de fundo ao passar o mouse */
+    background-color: #ff851b; /* Cor de fundo ao passar o mouse */
     color: #001a33; /* Cor do ícone ao passar o mouse */
     transform: scale(1.2); /* Aumenta o ícone ao passar o mouse */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra mais forte */
@@ -66,8 +66,6 @@ body {
     border-radius: 0; /* Garante que não haja borda arredondada na imagem */
 }
 
-
-
 /* Ícones sociais */
 .menu-bar .social-icons {
     display: flex;
@@ -81,7 +79,7 @@ body {
 }
 
 .menu-bar .social-icons a:hover {
-    color: #ffcc00; /* Cor de destaque ao passar o mouse */
+    color: #ff851b; /* Cor de destaque ao passar o mouse */
     transform: scale(1.2);
 }
 
@@ -255,7 +253,7 @@ footer {
 }
 
 .modal button:hover {
-    background-color: #FFCC00; /* Cor de hover para o botão */
+    background-color: #ff851b; /* Cor de hover para o botão */
     transform: scale(1.05); /* Efeito de aumento */
 }
 

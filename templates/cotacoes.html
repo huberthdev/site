@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Cotações</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='cotacoes.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -12,8 +12,8 @@
         <h1>Servhidel - Lista de Cotações</h1>
         <nav>
             <!-- Link para a página inicial -->
-            <a href="{{ url_for('home') }}" class="nav-link active">Início</a>
-        </nav>
+            <a href="{{ url_for('home') }}" class="nav-link active" style="color: white;">Início</a>
+        </nav>        
     </header>
 
     <!-- Nova div para separar a lista de cotações -->
