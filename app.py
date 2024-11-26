@@ -259,11 +259,78 @@ def listar_cotacoes():
 def inject_user():
     return {'username': session.get('username', '')}
 
-@app.route('/admin', methods=['GET'])
+@app.route('/admin', methods=['GET', 'POST'])
 def admin():
-    if session.get('nivel') == 1:
-        return render_template('admin.html')
-    return redirect('/login')
+    # Verifica se o usuário tem o nível de acesso necessário
+    if session.get('nivel') != 1:
+        return redirect('/login')
+
+    # Pega o valor do campo de busca (se existir)
+    search = request.args.get('search', '')  
+
+    # Conexão com o banco de dados
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    query = """
+    SELECT a.id_cliente, b.name, a.cpf, a.endereco, a.observacoes
+    FROM cliente a
+    INNER JOIN cotacao b ON a.id_cotacao = b.id
+    WHERE a.cpf ILIKE %s OR b.name ILIKE %s;
+    """
+    cursor.execute(query, (f'%{search}%', f'%{search}%'))
+
+    # Pega os resultados da consulta
+    clientes = cursor.fetchall()
+
+    # Obter os nomes das colunas dinamicamente
+    colunas = [desc[0] for desc in cursor.description]
+
+    # Fecha o cursor e a conexão com o banco de dados
+    cursor.close()
+    conn.close()
+
+    # Renderiza o template com os dados e colunas
+    return render_template('admin.html', clientes=clientes, colunas=colunas)
+
+
+# Rota para editar cliente
+@app.route('/editar/<int:id>', methods=['GET', 'POST'])
+def editar(id):
+    # Lógica para editar o cliente com o ID fornecido
+    pass  # A ser implementado
+
+# Rota para excluir cliente
+@app.route('/excluir/<int:id_cliente>', methods=['POST'])
+def excluir_cliente(id_cliente):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    try:
+        # Primeiro, obter o id_cotacao associado ao cliente
+        cursor.execute("SELECT id_cotacao FROM cliente WHERE id_cliente = %s", (id_cliente,))
+        id_cotacao = cursor.fetchone()
+        
+        if id_cotacao:  # Certifique-se de que o cliente existe
+            id_cotacao = id_cotacao[0]  # Extrai o valor do resultado
+
+            # Excluir o cliente
+            cursor.execute("DELETE FROM cliente WHERE id_cliente = %s", (id_cliente,))
+
+            # Excluir o registro associado na tabela cotacao
+            cursor.execute("DELETE FROM cotacao WHERE id = %s", (id_cotacao,))
+
+        conn.commit()  # Confirma as alterações no banco de dados
+    except Exception as e:
+        conn.rollback()  # Reverte em caso de erro
+        print(f"Erro ao excluir cliente: {e}")
+    finally:
+        cursor.close()
+        conn.close()
+
+    return redirect('/admin')  # Redireciona de volta para a página admin
+
+#---------------------------------------------------------
 
 if __name__ == '__main__':
     init_db()
