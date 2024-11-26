@@ -24,24 +24,29 @@
             </div>
         </div>
 
-        <!-- Menu de navegação -->
-        <nav class="navbar">
+        <nav class="fixed-nav">
             <ul class="nav-list">
-                {% if session.get('user_id') %}
-                    <li class="user-name">
-                        <span>Olá, {{ username }}!</span>
-                    </li>
-                    <li><a href="/logout">Sair</a></li>
-                    {% if session.get('nivel') == 1 %}
-                        <li><a href="/cotacoes">Cotações</a></li>
-                    {% elif session.get('nivel') == 2 %}
-                        <li><a href="/user">Acompanhar meu Projeto</a></li>
+                <div class="nav-left">
+                    {% if session.get('user_id') %}
+                        <li class="user-name">
+                            <span>Olá, {{ username }}!</span>
+                        </li>
+                        {% if session.get('nivel') == 1 %}
+                            <li><a href="/cotacoes">Cotações</a></li>
+                        {% elif session.get('nivel') == 2 %}
+                            <li><a href="/user">Acompanhar meu Projeto</a></li>
+                        {% endif %}
                     {% endif %}
-                {% else %}
-                    <li><a href="/login">Login</a></li>
-                {% endif %}
+                </div>
+                <div class="nav-right">
+                    {% if session.get('user_id') %}
+                        <li><a href="/logout">Sair</a></li>
+                    {% else %}
+                        <li><a href="/login">Login</a></li>
+                    {% endif %}
+                </div>
             </ul>
-        </nav>
+        </nav>            
 
         <div class="menu-bar">
             <img src="{{ url_for('static', filename='icons/banner.jpg') }}" alt="Banner" class="menu-banner">

@@ -403,9 +403,59 @@ footer {
     transform: scale(1.3); /* Aumento no dot ativo */
 }
 
-/* Menu de Navegação */
+/**/
+.fixed-nav {
+    position: fixed;  /* Fixa a barra de navegação no topo */
+    top: 0;           /* Alinha o nav no topo da página */
+    left: 0;          /* Alinha o nav à esquerda */
+    width: 100%;      /* O nav ocupará toda a largura da tela */
+    background-color: #333;  /* Cor de fundo do nav */
+    padding: 10px 0;  /* Adicionando um pouco de espaço ao redor do conteúdo */
+    z-index: 1000;    /* Garante que o nav fique acima de outros elementos */
+}
+
+.nav-list {
+    display: flex;  /* Usando flexbox */
+    justify-content: space-between;  /* Espaça os itens da lista */
+    align-items: center;  /* Alinha os itens verticalmente */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;  /* Garante que os itens fiquem alinhados verticalmente */
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;  /* Garante que os itens fiquem alinhados verticalmente */
+    margin-left: auto;    /* Empurra a nav-right para o canto direito */
+}
+
+.nav-list li {
+    padding: 5px 10px;
+}
+
+.nav-list a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.nav-list a:hover {
+    color: #ddd;  /* Altera a cor ao passar o mouse sobre o link */
+}
+
+body {
+    margin-top: 60px;  /* Adiciona um espaço acima do conteúdo para não ficar sobrepondo o nav fixo */
+}
+
+/**/
+
 .navbar {
-    background-color: #001f3f;
+    background-color: hwb(240 0% 85%);
     padding: 10px 0;
     text-align: center;
 }
