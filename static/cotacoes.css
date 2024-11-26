@@ -1,253 +1,230 @@
-/* Estilos globais */
-body {
-    font-family: 'Roboto', sans-serif;
+/* Reset básico e estilo de fontes */
+* {
     margin: 0;
     padding: 0;
-    background-color: #181818;  /* Fundo mais escuro */
-    color: #e0e0e0;  /* Cor do texto em um tom suave de cinza */
+    box-sizing: border-box;
 }
 
-/* Cabeçalho fixo */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to bottom, #001f3f, #001a33);
+    color: #f0f0f0;
+    line-height: 1.6;
+    padding: 20px;
+    overflow-x: hidden; /* Impede o scroll horizontal */
+}
+
+/* Cabeçalho */
 header {
-    background-color: #121212;  /* Fundo escuro para o cabeçalho */
-    padding: 20px 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 100;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);  /* Sombra mais suave */
-}
-
-header nav {
+    background-color: #001f3f;
+    padding: 20px;
     text-align: center;
-}
-
-header .nav-link {
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1.2rem;
-    padding: 12px 20px;
-    margin: 0 10px;
-    background-color: #333333;  /* Cor de fundo mais escura para os links */
-    border-radius: 30px;
-    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
-}
-
-header .nav-link:hover {
-    background-color: #444444;  /* Cor de fundo mais clara no hover */
-    transform: scale(1.05);
-}
-
-header .nav-link.active {
-    background-color: #007bff;  /* Azul para o link ativo */
-    color: #ffffff;
+    margin-bottom: 30px;
 }
 
 header h1 {
-    color: #ffffff;
     font-size: 2.5rem;
-    text-align: center;
-    margin: 60px 0 20px;
+    color: #fff;
 }
 
-/* Separando o conteúdo da lista */
+nav {
+    margin-top: 10px;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 500;
+}
+
+.nav-link.active {
+    color: #4caf50; /* Cor para link ativo */
+}
+
+.nav-link:hover {
+    color: #aaa;
+}
+
+/* Conteúdo principal */
 .main-content {
-    margin-top: 100px;  /* Ajuste conforme necessário para dar espaçamento */
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
 }
 
-/* Container principal */
 .container {
+    background: #00264d;
     padding: 20px;
-    max-width: 100%;
-    margin: 20px auto;
-    background-color: #2c2c2c;  /* Fundo escuro para o container */
     border-radius: 8px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);  /* Sombra mais escura */
+    overflow-x: auto; /* Permite rolagem horizontal, se necessário */
 }
 
-/* Título da página */
-.container h2 {
+h2 {
     font-size: 2rem;
-    color: #ffffff;  /* Cor clara para o título */
+    color: #fff;
     margin-bottom: 20px;
-    font-weight: 600;
 }
 
-/* Estilo da tabela */
-.table-wrapper {
-    overflow-x: auto;  /* Habilita rolagem horizontal quando necessário */
-}
-
+/* Tabela */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 30px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
+    margin-bottom: 20px;
+    border-radius: 8px;
     overflow: hidden;
-    background-color: #333333;  /* Fundo escuro para a tabela */
 }
 
 table th,
 table td {
-    padding: 12px 8px;
+    padding: 12px 15px;
     text-align: left;
-    font-size: 0.9rem;
-    border-bottom: 1px solid #555555;  /* Bordas mais escuras */
+    border-bottom: 1px solid #333;
+    word-wrap: break-word; /* Quebra palavras longas */
+    white-space: normal; /* Permite quebra de linha nas células */
 }
 
 table th {
-    background-color: #444444;  /* Fundo mais escuro para os cabeçalhos da tabela */
-    color: #ffffff;
-    font-weight: bold;
-}
-
-table tr:hover {
-    background-color: #555555;  /* Cor de fundo mais clara ao passar o mouse */
-    cursor: pointer;
+    background-color: #003366;
+    color: #fff;
 }
 
 table td {
-    color: #e0e0e0;  /* Cor do texto das células */
+    background-color: #001f3f;
+    color: #ccc;
 }
 
-/* Estilos de carregamento */
-.loading {
-    text-align: center;
-    font-size: 1.5rem;
-    color: #007bff;  /* Cor azul para o texto de carregamento */
-    font-weight: bold;
+table tr:hover {
+    background-color: #005a87;
 }
 
-/* Estilos de paginação */
+/* Paginação */
 .pagination {
-    text-align: center;
-    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
 }
 
 .pagination button {
-    padding: 10px 15px;
-    background-color: #444444;  /* Fundo escuro para os botões */
-    color: white;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
+    background-color: #004d7a;
+    color: #fff;
+    border: 1px solid #003366;
+    padding: 10px 20px;
     margin: 0 10px;
-    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 5px;
 }
 
 .pagination button:disabled {
-    background-color: #666666;  /* Cor mais clara para o botão desativado */
+    background-color: #333;
     cursor: not-allowed;
-    opacity: 0.6;
-}
-
-.pagination button:hover:not(:disabled) {
-    background-color: #555555;  /* Fundo mais claro no hover */
-    transform: scale(1.05);
 }
 
 .pagination span {
+    color: #fff;
     font-size: 1rem;
-    margin: 0 10px;
-    color: #e0e0e0;  /* Cor clara para o texto de paginação */
 }
 
-/* Estilos para o rodapé */
+/* Carregando */
+.loading {
+    text-align: center;
+    color: #aaa;
+    font-size: 1.5rem;
+}
+
+/* Rodapé */
 footer {
     text-align: center;
-    background-color: #121212;  /* Fundo escuro para o rodapé */
-    color: #e0e0e0;
-    padding: 15px 0;
     margin-top: 40px;
     font-size: 1rem;
+    color: #fff;
 }
 
 footer a {
-    color: #007bff;  /* Cor azul para os links */
+    color: #4caf50;
     text-decoration: none;
-    font-weight: bold;
 }
 
 footer a:hover {
-    text-decoration: underline;
+    color: #ddd;
 }
 
-/* Adicionando efeitos de transição em links e botões */
-a,
-button {
-    transition: all 0.3s ease;
-}
-
-/* Estilo do link ativo (Para destacar o link "Início" na navegação) */
-header .nav-link.active {
-    background-color: #007bff;
-    color: #ffffff;
-}
-
-/* Media Queries para telas pequenas (Celulares) */
-@media (max-width: 768px) {
+/* Responsividade */
+@media (max-width: 1024px) {
     header h1 {
-        font-size: 1.8rem;  /* Ajuste do tamanho da fonte do título */
-    }
-
-    header .nav-link {
-        font-size: 1rem;  /* Ajuste da fonte dos links */
-        padding: 8px 15px;  /* Menos padding para melhor ajuste */
-        margin: 5px 8px;  /* Reduzindo a margem entre os links */
+        font-size: 2rem;
     }
 
     .container {
         padding: 15px;
-        margin: 10px;
     }
 
-    .container h2 {
-        font-size: 1.6rem;  /* Reduzindo o tamanho do título */
-    }
-
-    table th, table td {
-        font-size: 0.85rem;  /* Fonte menor para telas pequenas */
-        padding: 10px;  /* Ajuste do padding */
+    table th,
+    table td {
+        padding: 10px 12px;
     }
 
     .pagination button {
-        padding: 10px 15px;  /* Botões um pouco menores */
-    }
-
-    .pagination span {
-        font-size: 1rem;  /* Fonte menor para a paginação */
+        font-size: 0.9rem;
+        padding: 8px 15px;
     }
 }
 
-/* Media Queries para telas muito pequenas (ex: Celulares em modo retrato) */
-@media (max-width: 480px) {
-    header h1 {
-        font-size: 1.5rem;  /* Reduzindo ainda mais o título */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 10px;
     }
 
-    header .nav-link {
-        font-size: 0.9rem;  /* Diminuindo mais o tamanho dos links */
-        padding: 6px 12px;  /* Menor padding */
-        margin: 5px;
-    }
-
-    .container h2 {
-        font-size: 1.4rem;  /* Ajuste do tamanho do título */
-    }
-
-    table th, table td {
-        font-size: 0.8rem;  /* Fonte ainda menor para otimizar */
-        padding: 8px;  /* Reduzindo o padding */
+    table th,
+    table td {
+        padding: 8px 10px;
+        font-size: 0.9rem;
     }
 
     .pagination button {
-        padding: 8px 12px;  /* Botões bem menores */
+        font-size: 0.8rem;
+        padding: 6px 12px;
     }
 
-    .pagination span {
-        font-size: 0.9rem;  /* Fonte da paginação ainda menor */
+    footer {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.6rem;
+    }
+
+    .nav-link {
+        font-size: 0.8rem;
+        margin: 0 8px;
+    }
+
+    table th,
+    table td {
+        padding: 6px 8px;
+        font-size: 0.85rem;
+    }
+
+    .pagination button {
+        font-size: 0.7rem;
+        padding: 5px 10px;
+    }
+
+    footer {
+        font-size: 0.8rem;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    table {
+        display: block; /* Adiciona rolagem horizontal */
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch; /* Para suavizar o movimento da rolagem */
     }
 }
