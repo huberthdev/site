@@ -60,7 +60,7 @@ header h1 {
 /* Container principal */
 .container {
     padding: 20px;
-    max-width: 1200px;
+    max-width: 100%;
     margin: 20px auto;
     background-color: #2c2c2c;  /* Fundo escuro para o container */
     border-radius: 8px;
@@ -76,6 +76,10 @@ header h1 {
 }
 
 /* Estilo da tabela */
+.table-wrapper {
+    overflow-x: auto;  /* Habilita rolagem horizontal quando necessário */
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -88,9 +92,9 @@ table {
 
 table th,
 table td {
-    padding: 16px;
+    padding: 12px 8px;
     text-align: left;
-    font-size: 1rem;
+    font-size: 0.9rem;
     border-bottom: 1px solid #555555;  /* Bordas mais escuras */
 }
 
@@ -124,13 +128,13 @@ table td {
 }
 
 .pagination button {
-    padding: 12px 20px;
+    padding: 10px 15px;
     background-color: #444444;  /* Fundo escuro para os botões */
     color: white;
     border: none;
     border-radius: 30px;
     cursor: pointer;
-    margin: 0 15px;
+    margin: 0 10px;
     transition: background-color 0.3s ease, transform 0.2s ease-in-out;
 }
 
@@ -146,7 +150,7 @@ table td {
 }
 
 .pagination span {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin: 0 10px;
     color: #e0e0e0;  /* Cor clara para o texto de paginação */
 }
@@ -181,4 +185,69 @@ button {
 header .nav-link.active {
     background-color: #007bff;
     color: #ffffff;
+}
+
+/* Media Queries para telas pequenas (Celulares) */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8rem;  /* Ajuste do tamanho da fonte do título */
+    }
+
+    header .nav-link {
+        font-size: 1rem;  /* Ajuste da fonte dos links */
+        padding: 8px 15px;  /* Menos padding para melhor ajuste */
+        margin: 5px 8px;  /* Reduzindo a margem entre os links */
+    }
+
+    .container {
+        padding: 15px;
+        margin: 10px;
+    }
+
+    .container h2 {
+        font-size: 1.6rem;  /* Reduzindo o tamanho do título */
+    }
+
+    table th, table td {
+        font-size: 0.85rem;  /* Fonte menor para telas pequenas */
+        padding: 10px;  /* Ajuste do padding */
+    }
+
+    .pagination button {
+        padding: 10px 15px;  /* Botões um pouco menores */
+    }
+
+    .pagination span {
+        font-size: 1rem;  /* Fonte menor para a paginação */
+    }
+}
+
+/* Media Queries para telas muito pequenas (ex: Celulares em modo retrato) */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5rem;  /* Reduzindo ainda mais o título */
+    }
+
+    header .nav-link {
+        font-size: 0.9rem;  /* Diminuindo mais o tamanho dos links */
+        padding: 6px 12px;  /* Menor padding */
+        margin: 5px;
+    }
+
+    .container h2 {
+        font-size: 1.4rem;  /* Ajuste do tamanho do título */
+    }
+
+    table th, table td {
+        font-size: 0.8rem;  /* Fonte ainda menor para otimizar */
+        padding: 8px;  /* Reduzindo o padding */
+    }
+
+    .pagination button {
+        padding: 8px 12px;  /* Botões bem menores */
+    }
+
+    .pagination span {
+        font-size: 0.9rem;  /* Fonte da paginação ainda menor */
+    }
 }
