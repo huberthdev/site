@@ -52,6 +52,21 @@ def init_db():
             );
         """)
 
+        # Criação da tabela de clientes
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS cliente (
+                id_cliente SERIAL PRIMARY KEY,
+                endereco TEXT,
+                cep VARCHAR(10),
+                cidade VARCHAR(255),
+                uf VARCHAR(2),
+                cpf VARCHAR(14),
+                observacoes TEXT,
+                id_cotacao INTEGER,
+                FOREIGN KEY (id_cotacao) REFERENCES cotacao(id)
+            );
+        """)
+
         # Criação da tabela de usuários
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS usuarios (
@@ -129,18 +144,11 @@ def logout():
     session.clear()
     return redirect('/')
 
-# Página do admin
-@app.route('/admin')
-def admin():
-    if session.get('nivel') == 1:
-        return render_template('admin.html')
-    return redirect('/login')
-
 # Página do usuário
-@app.route('/user')
-def user():
+@app.route('/meuorcamento')
+def meuorcamento():
     if session.get('nivel') == 2:
-        return render_template('user.html')
+        return render_template('meuorcamento.html')
     return redirect('/login')
 
 @app.route('/cotacoes')
@@ -250,6 +258,12 @@ def listar_cotacoes():
 @app.context_processor
 def inject_user():
     return {'username': session.get('username', '')}
+
+@app.route('/admin', methods=['GET'])
+def admin():
+    if session.get('nivel') == 1:
+        return render_template('admin.html')
+    return redirect('/login')
 
 if __name__ == '__main__':
     init_db()
