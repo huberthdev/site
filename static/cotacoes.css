@@ -87,11 +87,13 @@ table td {
 table th {
     background-color: #003366;
     color: #fff;
+    font-size: 1.1rem;
 }
 
 table td {
     background-color: #001f3f;
     color: #ccc;
+    font-size: 1rem; /* Fonte menor para dados da tabela */
 }
 
 table tr:hover {
@@ -164,6 +166,7 @@ footer a:hover {
     table th,
     table td {
         padding: 10px 12px;
+        font-size: 0.95rem;
     }
 
     .pagination button {
@@ -206,7 +209,7 @@ footer a:hover {
     table th,
     table td {
         padding: 6px 8px;
-        font-size: 0.85rem;
+        font-size: 0.85rem; /* Fonte menor para dados da tabela */
     }
 
     .pagination button {
