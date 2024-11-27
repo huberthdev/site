@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Clientes</title>
+    <!-- Link do Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Estilos personalizados para tema dark -->
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+        }
+        .card {
+            background-color: #333;
+        }
+        .table th, .table td {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid mt-5">
+        <h1 class="text-center">Gestão de Clientes</h1>
+        
+        <!-- Botão de voltar para a página inicial -->
+        <div class="mb-4 text-center">
+            <a href="/" class="btn btn-outline-light">Início</a>
+        </div>
+        
+        <!-- Campo de busca -->
+        <form class="d-flex mb-4" method="get" action="/admin">
+            <input class="form-control me-2" type="search" placeholder="Buscar por nome ou CPF" aria-label="Search" name="search" value="{{ request.args.get('search', '') }}">
+            <button class="btn btn-outline-light" type="submit">Buscar</button>
+        </form>
+        
+        <!-- Lista de clientes e pedidos -->
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive"> <!-- Tornar a tabela rolável em telas pequenas -->
+                    <table class="table table-bordered table-dark">
+                        <thead>
+                            <tr>
+                                {% for coluna in colunas %}
+                                    <th scope="col">{{ coluna }}</th>
+                                {% endfor %}
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cliente in clientes %}
+                                <tr>
+                                    {% for dado in cliente %}
+                                        <td>{{ dado }}</td>
+                                    {% endfor %}
+                                    <td>
+                                        <!-- Botão de editar -->
+                                        <a href="/editar/{{ cliente[0] }}" class="btn btn-warning btn-sm">Editar</a>
+                                        
+                                        <!-- Formulário de excluir com confirmação -->
+                                        <form action="/excluir/{{ cliente[0] }}" method="POST" style="display:inline;" onsubmit="return confirm('Tem certeza de que deseja excluir este cliente?');">
+                                            <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts do Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

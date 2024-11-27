@@ -1,0 +1,270 @@
+/* Barra Social à Esquerda */
+.social-bar {
+    position: fixed;
+    top: 50%; /* Fixa no meio da tela verticalmente */
+    left: 0;
+    transform: translateY(-50%); /* Centra verticalmente */
+    display: flex;
+    flex-direction: column; /* Organiza os ícones na vertical */
+    gap: 15px; /* Espaçamento entre os ícones */
+    padding: 10px; /* Espaçamento interno */
+    z-index: 1000; /* Garante que a barra fique sobre os outros elementos */
+}
+
+.social-icons {
+    display: flex;
+    flex-direction: column; /* Ícones na vertical */
+    gap: 15px; /* Espaçamento entre os ícones */
+}
+
+.social-icons a {
+    width: 50px;
+    height: 50px;
+    background-color: #ffffff; /* Fundo branco para os ícones */
+    border-radius: 50%; /* Ícones circulares */
+    font-size: 1.8rem; /* Tamanho maior para os ícones */
+    color: #001f3f; /* Cor do ícone */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, transform 0.3s; /* Efeito suave ao passar o mouse */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.social-icons a:hover {
+    background-color: #ffcc00; /* Cor de fundo ao passar o mouse */
+    color: #001a33; /* Cor do ícone ao passar o mouse */
+    transform: scale(1.2); /* Aumenta o ícone ao passar o mouse */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra mais forte */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #001f3f, #001a33); /* Gradiente de azul escuro */
+    margin: 0;
+    padding: 0;
+    color: white; /* Define a cor do texto para garantir a legibilidade */
+}
+
+/* Atualização para o menu-bar */
+.menu-bar {
+    background-color: hsla(209, 100%, 10%, 0);
+    display: flex; /* Alinha os elementos no eixo horizontal */
+    justify-content: center; /* Centraliza o conteúdo no menu-bar */
+    align-items: center; /* Alinha verticalmente */
+    padding: 0; /* Remove o padding para que a imagem preencha todo o espaço */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destaque */
+    position: relative;
+    border-radius: 0; /* Garantir que não haja borda arredondada */
+}
+
+/* Estilização da imagem do menu */
+.menu-banner {
+    width: 100%; /* Faz com que a largura ocupe 100% do contêiner */
+    height: 100%; /* Faz com que a altura ocupe 100% do contêiner */
+    object-fit: cover; /* Faz a imagem cobrir todo o espaço disponível */
+    border-radius: 0; /* Garante que não haja borda arredondada na imagem */
+}
+
+/* Ícones sociais */
+.menu-bar .social-icons {
+    display: flex;
+    gap: 15px; /* Espaçamento entre os ícones */
+}
+
+.menu-bar .social-icons a {
+    font-size: 1.5rem;
+    color: #ffffff; /* Cor dos ícones */
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.menu-bar .social-icons a:hover {
+    color: #ffcc00; /* Cor de destaque ao passar o mouse */
+    transform: scale(1.2);
+}
+
+/* Estilos do Formulário */
+.form-section form {
+    background-color: rgba(255, 255, 255, 0.9); /* Fundo branco com transparência */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: black; /* Texto legível no fundo claro */
+    max-width: 1000px; /* Define um tamanho máximo para o formulário */
+    width: 100%; /* O formulário vai ocupar até o limite máximo */
+    margin: 50px auto; /* Centraliza o formulário e adiciona um espaço em cima e embaixo */
+    transition: all 0.3s ease; /* Suaviza qualquer transição de mudança */
+}
+
+.form-section form:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Sombra mais forte ao passar o mouse */
+}
+
+.form-section form h2 {
+    text-align: center;  /* Centraliza o título */
+    margin-bottom: 20px;  /* Dá um espaço abaixo do título */
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 768px) {
+    .form-section form {
+        padding: 15px; /* Diminui o padding em telas menores */
+        margin: 15px; /* Diminui a margem em telas menores */
+        max-width: 90%; /* Limita o tamanho para 90% da largura da tela */
+    }
+
+    .form-section form h2 {
+        font-size: 1.3em; /* Reduz o tamanho da fonte do título */
+    }
+}
+
+@media (max-width: 480px) {
+    .form-section form {
+        padding: 10px; /* Reduz ainda mais o padding para telas muito pequenas */
+        margin: 10px; /* Reduz a margem */
+        max-width: 90%; /* Mantém o formulário com largura de até 90% */
+    }
+
+    .form-section form h2 {
+        font-size: 1.1em; /* Ajuste adicional no tamanho do título */
+    }
+}
+
+/* Resto do código permanece igual... */
+
+/* Media Queries para telas pequenas */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    .container {
+        padding: 10px;
+        width: 100%;
+        max-width: none;
+    }
+
+    .table {
+        font-size: 0.9rem;
+    }
+
+    footer {
+        font-size: 0.8rem;
+    }
+}
+
+/* Estilos do Rodapé */
+footer {
+    background-color: #001a33;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.footer-content p {
+    margin: 10px 0;
+}
+
+.footer-content a {
+    color: #FFA500; /* Cor laranja mais clara */
+    text-decoration: none;
+}
+
+/* Estilos do Modal */
+.modal {
+    display: none; /* Inicialmente oculta */
+    position: fixed;
+    z-index: 1000; /* Garantir que fique acima de outros conteúdos */
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* Fundo escurecido */
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+    background-color: #003366; /* Azul mais claro */
+    margin: auto;
+    padding: 30px;
+    border: 2px solid #ffffff;
+    width: 80%;
+    max-width: 400px; /* Limita o tamanho da modal */
+    text-align: center;
+    border-radius: 15px;
+    color: white;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Sombra suave */
+    animation: slideUp 0.5s ease-out;
+}
+
+.modal p {
+    font-size: 1.2rem; /* Tamanho do texto mais agradável */
+    margin: 15px 0;
+}
+
+.modal h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.modal button {
+    background-color: #FF9F00; /* Cor do botão mais destacada */
+    color: #003366; /* Cor do texto do botão */
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.modal button:hover {
+    background-color: #FFCC00; /* Cor de hover para o botão */
+    transform: scale(1.05); /* Efeito de aumento */
+}
+
+/* Estilo do botão de fechar */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Animação do Modal - Fade In */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
