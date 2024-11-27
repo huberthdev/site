@@ -16,38 +16,39 @@
 <body class="bg-dark text-white">
 
     <header class="bg-black">
-        <div class="container-fluid py-2 fixed-top" style="background: linear-gradient(to right, #030726, #091466);">
+        
+        <div class="container-fluid py-2 fixed-top" style="background: linear-gradient(to right, #030726, #091466); z-index: 1030;">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <a href="https://www.instagram.com/servhidel/" target="_blank" aria-label="Instagram" 
-                    style="color: #E1306C; font-size: 2rem; margin-right: 15px;">
-                     <i class="fab fa-instagram"></i>
-                 </a>
-                 <a href="https://wa.me/+5534993219735" target="_blank" aria-label="WhatsApp" 
-                    style="color: #25D366; font-size: 2rem;">
-                     <i class="fab fa-whatsapp"></i>
-                 </a>                 
+                       style="color: #E1306C; font-size: 2rem; margin-right: 15px;">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://wa.me/+5534993219735" target="_blank" aria-label="WhatsApp" 
+                       style="color: #25D366; font-size: 2rem;">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>                 
                 </div>
                 <div class="d-flex align-items-center">
                     {% if session.get('user_id') %}
                         {% if session.get('nivel') == 1 %}
-                            <a href="/admin" class="btn" style="background-color: #ff5733; color: white; margin-right: 15px;" class="text-white text-decoration-none rounded-pill px-4 py-2 shadow-sm hover-effect">Cotações</a>
+                            <a href="/admin" class="btn" style="background-color: #ff5733; color: white; margin-right: 15px;">Cotações</a>
                         {% else %}
-                            <a href="/meuprojeto" class="btn" style="background-color: #ff5733; color: white; margin-right: 15px;" class="text-white text-decoration-none rounded-pill px-4 py-2 shadow-sm hover-effect">Acompanhar Projeto</a>
+                            <a href="/meuprojeto" class="btn" style="background-color: #ff5733; color: white; margin-right: 15px;">Acompanhar Projeto</a>
                         {% endif %}
                     {% endif %}
                     <div>
                         {% if session.get('user_id') %}
-                            <a href="/logout" class="btn" style="background-color: hsl(0, 88%, 56%); color: white;" class="text-white text-decoration-none rounded-pill px-4 py-2 shadow-sm hover-effect">Sair</a>
+                            <a href="/logout" class="btn" style="background-color: hsl(0, 88%, 56%); color: white;">Sair</a>
                         {% else %}
-                            <a href="/login" class="btn" style="background-color: hsl(108, 78%, 42%); color: white;" class="text-white text-decoration-none rounded-pill px-4 py-2 shadow-sm hover-effect">Login</a>
+                            <a href="/login" class="btn" style="background-color: hsl(108, 78%, 42%); color: white;">Login</a>
                         {% endif %}
                     </div>
                 </div>
             </div>
         </div>        
-
-        <div class="menu-bar text-center">
+    
+        <div class="menu-bar text-center" style="margin-top: 64px;">
             <img src="{{ url_for('static', filename='icons/banner.jpg') }}" alt="Banner" class="img-fluid">
         </div>
     </header>
