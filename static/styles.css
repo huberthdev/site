@@ -14,15 +14,16 @@
 
 /* Estilo do conteúdo da modal */
 .modal-content {
-    background-color: #28a745; /* Cor verde de fundo */
+    background-color: #28a745; /* Cor verde do fundo da janela do modal */
     color: white; /* Cor do texto branca */
     padding: 30px;
-    border-radius: 8px;
+    border-radius: 8px; /* Borda arredondada */
     text-align: center;
-    width: 70%; /* Tamanho ajustável da modal */
-    max-width: 500px; /* Tamanho máximo da modal */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Sombra para dar destaque */
+    width: 70%; /* Largura ajustável */
+    max-width: 500px; /* Largura máxima */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Sombra para destaque */
     position: relative;
+    opacity: 1; /* Garante que a janela do modal não seja transparente */
 }
 
 /* Fechar a modal com o "X" */
