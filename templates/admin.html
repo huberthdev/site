@@ -41,16 +41,18 @@
                         <thead>
                             <tr>
                                 {% for coluna in colunas %}
-                                    <th scope="col" style="text-transform: uppercase; text-align: center;">{{ coluna }}</th>
+                                    <th scope="col" style="text-transform: uppercase; text-align: center; font-size: 0.9rem;">
+                                        {{ coluna }}
+                                    </th>
                                 {% endfor %}
-                                <th scope="col" style="text-align: center;">AÇÕES</th>
+                                <th scope="col" style="text-align: center; font-size: 0.9rem;">AÇÕES</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for cliente in clientes %}
                                 <tr>
                                     {% for dado in cliente %}
-                                        <td style="word-wrap: break-word; word-break: break-word; white-space: normal; text-align: center;">
+                                        <td style="word-wrap: break-word; word-break: break-word; white-space: normal; text-align: center; font-size: 0.85rem; max-width: 150px;">
                                             {{ dado }}
                                         </td>
                                     {% endfor %}
@@ -66,7 +68,8 @@
                     </table>
                 </div>
             </div>
-        </div>        
+        </div>
+               
     </div>
 
     <!-- Scripts do Bootstrap -->
