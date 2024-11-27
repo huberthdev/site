@@ -145,10 +145,10 @@ def logout():
     return redirect('/')
 
 # Página do usuário
-@app.route('/meuorcamento')
-def meuorcamento():
+@app.route('/meuprojeto')
+def meuprojeto():
     if session.get('nivel') == 2:
-        return render_template('meuorcamento.html')
+        return render_template('meuprojeto.html')
     return redirect('/login')
 
 @app.route('/cotacoes')
