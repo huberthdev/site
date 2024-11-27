@@ -16,7 +16,7 @@
 <body class="bg-dark text-white">
 
     <header class="bg-black">
-        <div class="container-fluid py-2" style="background: linear-gradient(to right, #030726, #091466);">
+        <div class="container-fluid py-2 fixed-top" style="background: linear-gradient(to right, #030726, #091466);">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <a href="https://www.instagram.com/servhidel/" target="_blank" aria-label="Instagram" 
@@ -45,7 +45,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>        
 
         <div class="menu-bar text-center">
             <img src="{{ url_for('static', filename='icons/banner.jpg') }}" alt="Banner" class="img-fluid">
@@ -100,7 +100,7 @@
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Descrição</label>
-                <textarea id="description" name="description" rows="4" class="form-control" required></textarea>
+                <textarea id="description" name="description" rows="4" class="form-control resize-none" required></textarea>                
             </div>
             <button type="submit" class="btn btn-primary w-100">Solicitar Orçamento</button>
         </form>
