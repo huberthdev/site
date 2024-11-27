@@ -35,3 +35,30 @@
     font-size: 24px;
     cursor: pointer;
 }
+
+/* Estilo base para a tabela */
+table.table {
+    font-size: 1rem; /* Tamanho de fonte padrão */
+    width: 100%; /* Largura completa */
+}
+
+/* Media Queries para ajustar a tabela em telas menores */
+@media (max-width: 768px) {
+    table.table {
+        font-size: 0.85rem; /* Reduz o tamanho da fonte */
+    }
+    table.table th,
+    table.table td {
+        padding: 0.5rem; /* Reduz o padding das células */
+    }
+}
+
+@media (max-width: 576px) {
+    table.table {
+        font-size: 0.75rem; /* Fonte menor ainda para telas muito pequenas */
+    }
+    table.table th,
+    table.table td {
+        padding: 0.3rem; /* Mais compacto */
+    }
+}
