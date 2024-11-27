@@ -25,43 +25,39 @@
     <div class="container-fluid mt-5">
         <h1 class="text-center">Gestão de Clientes</h1>
         
-        <!-- Botão de voltar para a página inicial -->
         <div class="mb-4 text-center">
             <a href="/" class="btn btn-outline-light">Início</a>
         </div>
         
-        <!-- Campo de busca -->
         <form class="d-flex mb-4" method="get" action="/admin">
             <input class="form-control me-2" type="search" placeholder="Buscar por nome ou CPF" aria-label="Search" name="search" value="{{ request.args.get('search', '') }}">
             <button class="btn btn-outline-light" type="submit">Buscar</button>
         </form>
         
-        <!-- Lista de clientes e pedidos -->
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive"> <!-- Tornar a tabela rolável em telas pequenas -->
-                    <table class="table table-bordered table-dark">
+                    <table class="table table-bordered table-dark" style="table-layout: auto; width: 100%;">
                         <thead>
                             <tr>
                                 {% for coluna in colunas %}
-                                    <th scope="col"style="text-transform: uppercase;">{{ coluna }}</th>
+                                    <th scope="col" style="text-transform: uppercase; text-align: center;">{{ coluna }}</th>
                                 {% endfor %}
-                                <th scope="col">AÇÕES</th>
+                                <th scope="col" style="text-align: center;">AÇÕES</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for cliente in clientes %}
                                 <tr>
                                     {% for dado in cliente %}
-                                        <td>{{ dado }}</td>
+                                        <td style="word-wrap: break-word; word-break: break-word; white-space: normal; text-align: center;">
+                                            {{ dado }}
+                                        </td>
                                     {% endfor %}
-                                    <td>
-                                        <!-- Botão de editar -->
-                                        <a href="/editar/{{ cliente[0] }}" class="btn btn-warning btn-sm">Editar</a>
-                                        
-                                        <!-- Formulário de excluir com confirmação -->
+                                    <td style="text-align: center;">
+                                        <a href="/editar/{{ cliente[0] }}" class="btn btn-warning btn-sm" style="margin-right: 5px; width: 80px;">Editar</a>
                                         <form action="/excluir/{{ cliente[0] }}" method="POST" style="display:inline;" onsubmit="return confirm('Tem certeza de que deseja excluir este cliente?');">
-                                            <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                                            <button type="submit" class="btn btn-danger btn-sm" style="margin-right: 15px; width: 80px;">Excluir</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -70,7 +66,7 @@
                     </table>
                 </div>
             </div>
-        </div>
+        </div>        
     </div>
 
     <!-- Scripts do Bootstrap -->
