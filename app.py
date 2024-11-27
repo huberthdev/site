@@ -191,10 +191,10 @@ def criar_cotacao():
         if not all(key in data for key in ['name', 'email', 'phone', 'description']):
             return jsonify({"error": "Faltam campos obrigatórios"}), 400
 
-        name = data['name'].upper()
-        email = data['email'].lower()
-        phone = data['phone']
-        description = data['description'].upper()
+        name = data['name'].upper().strip()
+        email = data['email'].lower().strip()
+        phone = data['phone'].strip()
+        description = data['description'].upper().strip()
 
         conn = get_db_connection()
         cursor = conn.cursor()
