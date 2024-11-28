@@ -239,19 +239,19 @@ def _projeto(id_cliente):
 
         # Dados da tabela cotacao
         id_cotacao = dados.get('campo_id_cotacao')  # Já vem do formulário
-        name = dados.get('campo_name')
-        email = dados.get('campo_email')
-        phone = dados.get('campo_phone')
-        description = dados.get('campo_description')
-        status = dados.get('campo_status')  # Convertendo para número
+        name = dados.get('campo_name').strip()
+        email = dados.get('campo_email').strip()
+        phone = dados.get('campo_phone').strip()
+        description = dados.get('campo_description').strip()
+        status = dados.get('campo_status').strip()  # Convertendo para número
 
         # Dados da tabela cliente
-        endereco = dados.get('campo_endereco')
-        cep = dados.get('campo_cep')
+        endereco = dados.get('campo_endereco').strip()
+        cep = dados.get('campo_cep').strip()
         cep = re.sub(r'\D', '', dados.get('campo_cep'))
-        cidade = dados.get('campo_cidade')
-        uf = dados.get('campo_uf')
-        observacoes = dados.get('campo_observacoes')
+        cidade = dados.get('campo_cidade').strip()
+        uf = dados.get('campo_uf').strip()
+        observacoes = dados.get('campo_observacoes').strip()
 
         # Atualizar a tabela cotacao
         cursor.execute("""
