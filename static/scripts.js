@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const phoneInput = document.getElementById('phone');
     const form = document.getElementById('frmMain');
+    const editForm = document.getElementById('form-edicao'); // Adicionado para o modal no formulário de edição
 
     if (phoneInput) {
         phoneInput.addEventListener('input', function (e) {
@@ -31,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     if (form) {
-        form.addEventListener('submit', function(event) {
+        form.addEventListener('submit', function (event) {
             event.preventDefault(); // Impede o envio padrão do formulário
 
             const phoneValue = phoneInput.value.replace(/\D/g, '');
@@ -55,23 +56,35 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 body: JSON.stringify(formData)
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.message) {
-                    showModal(data.message); // Exibe o modal com a mensagem de sucesso
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        showModal(data.message); // Exibe o modal com a mensagem de sucesso
 
-                    form.reset(); // Reseta o formulário após sucesso
-                } else if (data.error) {
-                    alert('Erro: ' + data.error);
-                }
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-                alert('Houve um erro ao enviar o orçamento. Tente novamente.');
-            });
+                        form.reset(); // Reseta o formulário após sucesso
+                    } else if (data.error) {
+                        alert('Erro: ' + data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    alert('Houve um erro ao enviar o orçamento. Tente novamente.');
+                });
         });
     } else {
         console.error("Formulário não encontrado. Verifique o ID do formulário.");
+    }
+
+    if (editForm) {
+        editForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Mostra o modal diretamente
+            showModal("Alterado com sucesso!");
+
+            // Envia os dados do formulário usando o método POST padrão
+            event.target.submit();
+        });
     }
 
     function showModal(message) {
@@ -82,22 +95,22 @@ document.addEventListener('DOMContentLoaded', function () {
         modal.style.display = 'flex';
 
         const closeButton = modal.querySelector('.close');
-        closeButton.onclick = function() {
+        closeButton.onclick = function () {
             modal.style.display = 'none';
         };
 
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             if (event.target === modal) {
                 modal.style.display = 'none';
             }
         };
 
-        setTimeout(function() {
+        setTimeout(function () {
             modal.style.display = 'none';
         }, 5000);
     }
 
-    window.onload = function() {
+    window.onload = function () {
         const currentUrl = window.location.href;
         const baseUrl = window.location.origin + window.location.pathname;
 
@@ -121,57 +134,41 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Função para atualizar a cor do campo com base no valor selecionado
 function atualizarCorStatus(selectElement) {
-    // Obtém o valor atual do campo
     const valor = parseInt(selectElement.value);
 
-    // Remove todas as classes de cor previamente adicionadas
     selectElement.classList.remove('status-vermelho', 'status-azul', 'status-verde');
 
-    // Aplica a cor com base no valor
     if (valor === 0) {
-        selectElement.classList.add('status-vermelho'); // Ainda não trabalhado
+        selectElement.classList.add('status-vermelho');
     } else if (valor === 7 || valor === 8 || valor === 9) {
-        selectElement.classList.add('status-verde'); // Finalizado
+        selectElement.classList.add('status-verde');
     } else {
-        selectElement.classList.add('status-azul'); // Em progresso
+        selectElement.classList.add('status-azul');
     }
 }
 
-// Evento para resetar a cor ao abrir o campo de seleção
 function resetarCorStatus(selectElement) {
     selectElement.classList.remove('status-vermelho', 'status-azul', 'status-verde');
 }
 
-// Evento para definir a cor ao fechar o campo de seleção
 function aplicarCorStatus(selectElement) {
     atualizarCorStatus(selectElement);
 }
 
-// Executa ao carregar a página para definir a cor inicial
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const statusSelect = document.getElementById('campo_status');
 
-    // Define a cor inicial ao carregar a página
     atualizarCorStatus(statusSelect);
 
-    // Adiciona evento de clique para resetar a cor quando o campo de seleção for aberto
-    statusSelect.addEventListener('click', function() {
-        resetarCorStatus(statusSelect); // Resetar a cor sempre que o campo for clicado
+    statusSelect.addEventListener('click', function () {
+        resetarCorStatus(statusSelect);
     });
 
-    // Aplica a cor correta ao sair do campo de seleção (quando o campo perde o foco)
-    statusSelect.addEventListener('blur', function() {
+    statusSelect.addEventListener('blur', function () {
         aplicarCorStatus(statusSelect);
     });
 
-    // Atualiza a cor ao selecionar uma nova opção (logo após a seleção, não apenas no blur)
-    statusSelect.addEventListener('change', function() {
-        atualizarCorStatus(statusSelect); // Atualiza a cor imediatamente após a mudança de valor
+    statusSelect.addEventListener('change', function () {
+        atualizarCorStatus(statusSelect);
     });
-});
-
-document.getElementById('form-edicao').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    showModal("Alterado com sucesso!"); // Exibe o modal de sucesso ao submeter
 });
