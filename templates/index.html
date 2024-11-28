@@ -34,7 +34,10 @@
                         {% if session.get('nivel') == 1 %}
                             <a href="/admin" class="btn" style="background-color: #ff5733; color: white; margin-right: 15px;">Cotações</a>
                         {% else %}
-                            <a href="/meuprojeto" class="btn" style="background-color: #ff5733; color: white; margin-right: 15px;">Acompanhar Projeto</a>
+                            <a href="{{ url_for('_projeto', id_cliente=123) }}" 
+                            class="btn" 
+                            style="background-color: #ff5733; color: white; margin-right: 15px;">Acompanhar Projeto
+                            </a>
                         {% endif %}
                     {% endif %}
                     <div>
