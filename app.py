@@ -76,12 +76,6 @@ def logout():
     session.clear()
     return redirect('/')
 
-@app.route('/meuprojeto')
-def meuprojeto():
-    if session.get('nivel') == 2:
-        return render_template('meuprojeto.html')
-    return redirect('/login')
-
 @app.route('/cotacoes')
 def cotacoes():
     if 'user_id' not in session:
