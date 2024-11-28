@@ -100,7 +100,7 @@
                                             maxlength="11"
                                             pattern="\d*"
                                             inputmode="numeric">
-                                            {% else %}
+                                    {% else %}
                                         <input type="text" id="{{ 'phone' if coluna == 'phone' else 'campo_' + coluna }}" 
                                             name="campo_{{ coluna }}" 
                                             class="form-control {% if coluna in ['id_cliente', 'id_cotacao', 'data_cadastro'] %}readonly{% endif %}" 
