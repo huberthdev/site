@@ -64,7 +64,6 @@
             background-color: hsl(120, 67%, 59%) !important; /* Verde claro */
             color: #004d00;
         }
-
     </style>
 </head>
 <body>
@@ -94,6 +93,12 @@
                                             </option>
                                         {% endfor %}
                                     </select>                                    
+                                {% elif coluna == 'cpf' %}
+                                    <!-- Campo CPF com máscara -->
+                                    <input type="text" id="campo_cpf" 
+                                        name="campo_cpf" 
+                                        class="form-control"
+                                        value="{{ cliente[loop.index0] if cliente[loop.index0] is not none else '' }}">
                                 {% else %}
                                     <input type="text" id="{{ 'phone' if coluna == 'phone' else 'campo_' + coluna }}" 
                                         name="campo_{{ coluna }}" 

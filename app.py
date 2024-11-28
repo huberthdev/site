@@ -246,8 +246,8 @@ def _projeto(id_cliente):
         status = dados.get('campo_status').strip()  # Convertendo para número
 
         # Dados da tabela cliente
+        cpf = dados.get('campo_cpf').strip()  # Adicionando CPF
         endereco = dados.get('campo_endereco').strip()
-        cep = dados.get('campo_cep').strip()
         cep = re.sub(r'\D', '', dados.get('campo_cep'))
         cidade = dados.get('campo_cidade').strip()
         uf = dados.get('campo_uf').strip()
@@ -263,9 +263,9 @@ def _projeto(id_cliente):
         # Atualizar a tabela cliente
         cursor.execute("""
             UPDATE cliente
-            SET endereco = %s, cep = %s, cidade = %s, uf = %s, observacoes = %s
+            SET cpf = %s, endereco = %s, cep = %s, cidade = %s, uf = %s, observacoes = %s
             WHERE id_cliente = %s
-        """, (endereco, cep, cidade, uf, observacoes, id_cliente))
+        """, (cpf, endereco, cep, cidade, uf, observacoes, id_cliente))
 
         # Commit para salvar as alterações
         conn.commit()
@@ -281,7 +281,7 @@ def _projeto(id_cliente):
     cursor.execute("""
         SELECT 
             a.id_cliente, a.id_cotacao, b.name, b.email, b.phone, b.description, b.status, 
-            a.endereco, a.cep, a.cidade, a.uf, a.observacoes, a.data_cadastro
+            a.cpf, a.endereco, a.cep, a.cidade, a.uf, a.observacoes, a.data_cadastro
         FROM cliente a
         INNER JOIN cotacao b ON a.id_cotacao = b.id
         INNER JOIN status c ON b.status = c.status
@@ -300,7 +300,7 @@ def _projeto(id_cliente):
         # Definir as colunas para o template
         colunas = [
             'id_cliente', 'id_cotacao', 'name', 'email', 'phone', 'description', 'status', 
-            'endereco', 'cep', 'cidade', 'uf', 'observacoes', 'data_cadastro'
+            'cpf', 'endereco', 'cep', 'cidade', 'uf', 'observacoes', 'data_cadastro'
         ]
         return render_template(
             'cliente.html', 
@@ -312,6 +312,7 @@ def _projeto(id_cliente):
         )
     else:
         return "Cliente não encontrado", 404
+
 
 
 if __name__ == '__main__':
