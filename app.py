@@ -191,7 +191,7 @@ def admin():
     SELECT a.id_cliente as ID, b.name as NOME, a.cpf as CPF, a.observacoes as OBSERVAÇÃO
     FROM cliente a
     INNER JOIN cotacao b ON a.id_cotacao = b.id
-    WHERE a.cpf ILIKE %s OR b.name ILIKE %s AND b.status < 7;
+    WHERE a.cpf ILIKE %s OR b.name ILIKE %s;
     """
     cursor.execute(query, (f'%{search}%', f'%{search}%'))
     clientes = cursor.fetchall()
