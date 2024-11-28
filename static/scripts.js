@@ -1,33 +1,35 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const phoneInput = document.getElementById('phone');
-    const form = document.getElementById('frmMain');
+document.addEventListener('DOMContentLoaded', function () {
+    // Seleciona todos os campos de telefone que precisam da validação
+    const phoneInputs = document.querySelectorAll('input[id="phone"]');
 
-    // Formatação do telefone
-    phoneInput.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/\D/g, ''); // Remove tudo que não for número
+    phoneInputs.forEach(phoneInput => {
+        // Formatação do telefone
+        phoneInput.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, ''); // Remove tudo que não for número
 
-        if (value.length > 0) {
-            if (value.length <= 2) {
-                value = `(${value}`; // Formato (XX
-            } else if (value.length <= 7) {
-                value = `(${value.substring(0, 2)}) ${value.substring(2)}`; // Formato (XX) XXXXX
-            } else {
-                value = `(${value.substring(0, 2)}) ${value.substring(2, 7)}-${value.substring(7, 11)}`; // Formato (XX) XXXXX-XXXX
+            if (value.length > 0) {
+                if (value.length <= 2) {
+                    value = `(${value}`; // Formato (XX
+                } else if (value.length <= 7) {
+                    value = `(${value.substring(0, 2)}) ${value.substring(2)}`; // Formato (XX) XXXXX
+                } else {
+                    value = `(${value.substring(0, 2)}) ${value.substring(2, 7)}-${value.substring(7, 11)}`; // Formato (XX) XXXXX-XXXX
+                }
             }
-        }
 
-        e.target.value = value; // Atualiza o campo com o valor formatado
+            e.target.value = value; // Atualiza o campo com o valor formatado
+        });
+
+        // Validação ao sair do campo (blur)
+        phoneInput.addEventListener('blur', function (e) {
+            const value = e.target.value.replace(/\D/g, ''); // Remove tudo que não for número
+            if (value.length < 10 || value.length > 11) {
+                alert('Por favor, insira um número válido com DDD e telefone completo.');
+                e.target.value = ''; // Limpa o campo se o número não for válido
+            }
+        });
     });
-
-    // Validação ao sair do campo (blur)
-    phoneInput.addEventListener('blur', function(e) {
-        const value = e.target.value.replace(/\D/g, ''); // Remove tudo que não for número
-        if (value.length < 10 || value.length > 11) {
-            alert('Por favor, insira um número válido com DDD e telefone completo.');
-            e.target.value = ''; // Limpa o campo se o número não for válido
-        }
-    });
-
+    
     // Evento de envio do formulário
     form.addEventListener('submit', function(event) {
         event.preventDefault(); // Impede o envio padrão do formulário

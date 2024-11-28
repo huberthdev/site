@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Cliente</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+        }
+        .card {
+            background-color: #333;
+            border: none;
+        }
+        .form-control, .btn {
+            border-radius: 0.3rem;
+        }
+        .form-control[readonly] {
+            background-color: #6c757d !important; /* Cinza claro */
+            color: white;
+            cursor: not-allowed;
+        }
+        label {
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: #091466;
+            border-color: #091466;
+        }
+        .btn-primary:hover {
+            background-color: #030726;
+            border-color: #030726;
+        }
+        .fixed-header {
+            background: linear-gradient(to right, #030726, #091466);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1030;
+            padding: 10px 0;
+        }
+        .content {
+            margin-top: 80px;
+            padding: 20px; /* Espaçamento interno */
+        }
+        .form-wrapper {
+            margin: 20px auto; /* Espaçamento externo superior/inferior */
+            max-width: 900px; /* Limita a largura */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho fixo -->
+    <div class="fixed-header py-2 d-flex justify-content-end pe-3">
+        <a href="/admin" class="btn btn-outline-light">Voltar</a>
+    </div>
+
+    <!-- Conteúdo principal -->
+    <div class="content container">
+        <div class="form-wrapper">
+            <div class="card p-3">
+                <h1 class="text-center mb-4">Editar Cliente</h1>
+                
+                <form id="form-edicao" method="POST" action="{{ url_for('editar_cliente', id_cliente=id_cliente) }}">
+                    <!-- Campos do formulário -->
+                    <div class="row">
+                        {% for coluna in colunas %}
+                            <div class="col-md-6 mb-3">
+                                <label for="campo_{{ coluna }}">{{ coluna.replace('_', ' ').capitalize() }}</label>
+                                <input type="text" id="{{ 'phone' if coluna == 'phone' else 'campo_' + coluna }}" 
+                                    name="campo_{{ coluna }}" 
+                                    class="form-control {% if coluna in ['id_cliente', 'id_cotacao', 'data_cadastro'] %}readonly{% endif %}" 
+                                    value="{{ cliente[loop.index0] if cliente[loop.index0] is not none else '' }}" 
+                                    {% if coluna in ['id_cliente', 'id_cotacao', 'data_cadastro'] %}readonly{% endif %}>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <!-- Botão de envio -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary px-4">Salvar Edição</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
