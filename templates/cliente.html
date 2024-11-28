@@ -51,7 +51,6 @@
             margin: 20px auto;
             max-width: 900px;
         }
-
         .status-vermelho {
             background-color: hsl(0, 84%, 65%) !important; /* Vermelho claro */
             color: #660000;
@@ -81,33 +80,41 @@
                 <form id="form-edicao" method="POST" action="{{ url_for('_projeto', id_cliente=id_cliente) }}">
                     <div class="row">
                         {% for coluna in colunas %}
-                            <div class="col-md-6 mb-3">
-                                <label for="campo_{{ coluna }}">{{ coluna.replace('_', ' ').capitalize() }}</label>
-                                {% if coluna == 'status' %}
-                                    <!-- Campo de seleção com opções de status -->
-                                    <select id="campo_status" name="campo_status" class="form-select form-control readonly">
-                                        {% for status, descricao in status_opcoes %}
-                                            <option value="{{ status }}" 
-                                                    {% if status == status_atual %}selected{% endif %}>
-                                                {{ descricao }}
-                                            </option>
-                                        {% endfor %}
-                                    </select>                                    
-                                {% elif coluna == 'cpf' %}
-                                    <!-- Campo CPF com máscara -->
-                                    <input type="text" id="campo_cpf" 
-                                        name="campo_cpf" 
-                                        class="form-control"
-                                        value="{{ cliente[loop.index0] if cliente[loop.index0] is not none else '' }}">
-                                {% else %}
-                                    <input type="text" id="{{ 'phone' if coluna == 'phone' else 'campo_' + coluna }}" 
-                                        name="campo_{{ coluna }}" 
-                                        class="form-control {% if coluna in ['id_cliente', 'id_cotacao', 'data_cadastro'] %}readonly{% endif %}" 
-                                        value="{{ cliente[loop.index0] if cliente[loop.index0] is not none else '' }}" 
-                                        {% if coluna in ['id_cliente', 'id_cotacao', 'data_cadastro'] %}readonly{% endif %}>
-                                {% endif %}
-                            </div>
+                            {% if coluna != 'observacoes' %}
+                                <div class="col-md-6 mb-3">
+                                    <label for="campo_{{ coluna }}">{{ coluna.replace('_', ' ').capitalize() }}</label>
+                                    {% if coluna == 'status' %}
+                                        <select id="campo_status" name="campo_status" class="form-select form-control readonly">
+                                            {% for status, descricao in status_opcoes %}
+                                                <option value="{{ status }}" 
+                                                        {% if status == status_atual %}selected{% endif %}>
+                                                    {{ descricao }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    {% elif coluna == 'cpf' %}
+                                        <input type="text" id="campo_cpf" 
+                                            name="campo_cpf" 
+                                            class="form-control"
+                                            value="{{ cliente[loop.index0] if cliente[loop.index0] is not none else '' }}">
+                                    {% else %}
+                                        <input type="text" id="{{ 'phone' if coluna == 'phone' else 'campo_' + coluna }}" 
+                                            name="campo_{{ coluna }}" 
+                                            class="form-control {% if coluna in ['id_cliente', 'id_cotacao', 'data_cadastro'] %}readonly{% endif %}" 
+                                            value="{{ cliente[loop.index0] if cliente[loop.index0] is not none else '' }}" 
+                                            {% if coluna in ['id_cliente', 'id_cotacao', 'data_cadastro'] %}readonly{% endif %}>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
                         {% endfor %}
+                        <!-- Campo Observações como o último campo -->
+                        <div class="col-md-12 mb-3">
+                            <label for="campo_observacoes">Observações</label>
+                            <textarea id="campo_observacoes" 
+                                      name="campo_observacoes" 
+                                      class="form-control" 
+                                      rows="5">{{ cliente[colunas.index('observacoes')] if cliente[colunas.index('observacoes')] is not none else '' }}</textarea>
+                        </div>
                     </div>
                     
                     <!-- Botão de envio -->
