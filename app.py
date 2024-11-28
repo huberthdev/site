@@ -228,33 +228,44 @@ def excluir_cliente(id_cliente):
 
     return redirect('/admin')
 
-@app.route('/editar_cliente/<int:id_cliente>', methods=['GET', 'POST'])
-def editar_cliente(id_cliente):
+@app.route('/_projeto/<int:id_cliente>', methods=['GET', 'POST'])
+def _projeto(id_cliente):
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    # Alterando a consulta para usar INNER JOIN
+    # Consulta para buscar os dados do cliente
     cursor.execute("""
         SELECT 
-            a.id_cliente, a.id_cotacao, b.name, b.email, b.phone, b.description, b.status, 
+            a.id_cliente, a.id_cotacao, b.name, b.email, b.phone, b.description, c.descricao AS status, 
             a.endereco, a.cep, a.cidade, a.uf, a.observacoes, a.data_cadastro
         FROM cliente a
         INNER JOIN cotacao b ON a.id_cotacao = b.id
+        INNER JOIN status c ON b.status = c.status
         WHERE a.id_cliente = %s
     """, (id_cliente,))
-    
     cliente = cursor.fetchone()
+
+    # Consulta para buscar as opções de status
+    cursor.execute("SELECT status, descricao FROM status ORDER BY status")
+    status_opcoes = cursor.fetchall()  # Retorna uma lista de tuplas (status, descricao)
 
     cursor.close()
     conn.close()
 
     if cliente:
-        # Definir as colunas para o template, incluindo as novas colunas da cotacao
+        # Definir as colunas para o template
         colunas = [
             'id_cliente', 'id_cotacao', 'name', 'email', 'phone', 'description', 'status', 
             'endereco', 'cep', 'cidade', 'uf', 'observacoes', 'data_cadastro'
         ]
-        return render_template('cliente.html', cliente=cliente, colunas=colunas, id_cliente=id_cliente)
+        return render_template(
+            'cliente.html', 
+            cliente=cliente, 
+            colunas=colunas, 
+            status_opcoes=status_opcoes,  # Enviar opções de status para o template
+            status_atual=cliente[6],  # Passar o status atual do cliente
+            id_cliente=id_cliente
+        )
     else:
         return "Cliente não encontrado", 404
 
