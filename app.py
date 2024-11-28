@@ -246,7 +246,7 @@ def _projeto(id_cliente):
         status = dados.get('campo_status').strip()  # Convertendo para número
 
         # Dados da tabela cliente
-        cpf = dados.get('campo_cpf').strip()  # Adicionando CPF
+        cpf = re.sub(r'\D', '', dados.get('campo_cpf'))
         endereco = dados.get('campo_endereco').strip()
         cep = re.sub(r'\D', '', dados.get('campo_cep'))
         cidade = dados.get('campo_cidade').strip()

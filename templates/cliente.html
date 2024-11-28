@@ -96,8 +96,11 @@
                                         <input type="text" id="campo_cpf" 
                                             name="campo_cpf" 
                                             class="form-control"
-                                            value="{{ cliente[loop.index0] if cliente[loop.index0] is not none else '' }}">
-                                    {% else %}
+                                            value="{{ cliente[loop.index0] if cliente[loop.index0] is not none else '' }}"
+                                            maxlength="11"
+                                            pattern="\d*"
+                                            inputmode="numeric">
+                                            {% else %}
                                         <input type="text" id="{{ 'phone' if coluna == 'phone' else 'campo_' + coluna }}" 
                                             name="campo_{{ coluna }}" 
                                             class="form-control {% if coluna in ['id_cliente', 'id_cotacao', 'data_cadastro'] %}readonly{% endif %}" 
