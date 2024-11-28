@@ -188,9 +188,10 @@ def admin():
     cursor = conn.cursor()
 
     query = """
-    SELECT a.id_cliente as ID, b.name as NOME, a.cpf as CPF, a.observacoes as OBSERVAÇÃO
+    SELECT a.id_cliente as ID, b.name as NOME, c.descricao as STATUS
     FROM cliente a
     INNER JOIN cotacao b ON a.id_cotacao = b.id
+    INNER JOIN status c ON b.status = c.status
     WHERE a.cpf ILIKE %s OR b.name ILIKE %s;
     """
     cursor.execute(query, (f'%{search}%', f'%{search}%'))
