@@ -18,7 +18,7 @@
             border-radius: 0.3rem;
         }
         .form-control[readonly] {
-            background-color: #6c757d !important; /* Cinza claro */
+            background-color: #6c757d !important;
             color: white;
             cursor: not-allowed;
         }
@@ -44,11 +44,11 @@
         }
         .content {
             margin-top: 80px;
-            padding: 20px; /* Espaçamento interno */
+            padding: 20px;
         }
         .form-wrapper {
-            margin: 20px auto; /* Espaçamento externo superior/inferior */
-            max-width: 900px; /* Limita a largura */
+            margin: 20px auto;
+            max-width: 900px;
         }
     </style>
 </head>
@@ -63,7 +63,7 @@
     <div class="content container">
         <div class="form-wrapper">
             <div class="card p-3">
-                <h1 class="text-center mb-4">Editar Cliente</h1>
+                <h1 class="text-center mb-4">PROJETO</h1>
                 
                 <form id="form-edicao" method="POST" action="{{ url_for('editar_cliente', id_cliente=id_cliente) }}">
                     <!-- Campos do formulário -->
@@ -82,7 +82,7 @@
                     
                     <!-- Botão de envio -->
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary px-4">Salvar Edição</button>
+                        <button type="submit" class="btn btn-primary px-4">Salvar</button>
                     </div>
                 </form>
             </div>
