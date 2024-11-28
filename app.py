@@ -1,8 +1,7 @@
-from flask import Flask, request, redirect, jsonify, render_template, session, flash
+from flask import Flask, request, redirect, url_for, jsonify, render_template, session, flash
 from flask_cors import CORS
 from dotenv import load_dotenv
-import psycopg2, os, logging
-
+import psycopg2, os, re,  logging
 
 load_dotenv()
 
@@ -233,10 +232,54 @@ def _projeto(id_cliente):
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    # Consulta para buscar os dados do cliente
+    if request.method == 'POST':
+        # Obter dados enviados no formulário
+        dados = request.form
+
+        # Dados da tabela cotacao
+        id_cotacao = dados.get('campo_id_cotacao')  # Já vem do formulário
+        name = dados.get('campo_name')
+        email = dados.get('campo_email')
+        phone = dados.get('campo_phone')
+        description = dados.get('campo_description')
+        status = dados.get('campo_status')  # Convertendo para número
+
+        # Dados da tabela cliente
+        endereco = dados.get('campo_endereco')
+        cep = dados.get('campo_cep')
+        cep = re.sub(r'\D', '', dados.get('campo_cep'))
+        cidade = dados.get('campo_cidade')
+        uf = dados.get('campo_uf')
+        observacoes = dados.get('campo_observacoes')
+
+        # Atualizar a tabela cotacao
+        cursor.execute("""
+            UPDATE cotacao
+            SET name = %s, email = %s, phone = %s, description = %s, status = %s
+            WHERE id = %s
+        """, (name, email, phone, description, status, id_cotacao))
+
+        # Atualizar a tabela cliente
+        cursor.execute("""
+            UPDATE cliente
+            SET endereco = %s, cep = %s, cidade = %s, uf = %s, observacoes = %s
+            WHERE id_cliente = %s
+        """, (endereco, cep, cidade, uf, observacoes, id_cliente))
+
+        # Commit para salvar as alterações
+        conn.commit()
+
+        # Fechar a conexão
+        cursor.close()
+        conn.close()
+
+        # Redirecionar para evitar reenvio do formulário
+        return redirect(url_for('_projeto', id_cliente=id_cliente, salvo=1))
+
+    # Consulta para buscar os dados do cliente (GET)
     cursor.execute("""
         SELECT 
-            a.id_cliente, a.id_cotacao, b.name, b.email, b.phone, b.description, c.descricao AS status, 
+            a.id_cliente, a.id_cotacao, b.name, b.email, b.phone, b.description, b.status, 
             a.endereco, a.cep, a.cidade, a.uf, a.observacoes, a.data_cadastro
         FROM cliente a
         INNER JOIN cotacao b ON a.id_cotacao = b.id
