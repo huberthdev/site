@@ -40,7 +40,7 @@ Solicitar orçamento: O cliente preenche Nome e Telefone (E-mail e descrição �
 Gestão de orçamento: Os administradores podem logar e preencher mais dados do cliente,
 modificar o status do projeto da instalação ou excluir o projeto.
 
-Acompanhamento do projeto pelo cliente: Quando o adminsitrador adiciona o CPF do cliente no projeto solicitado,
+Acompanhamento do projeto pelo cliente: Quando o administrador adiciona o CPF do cliente ao projeto solicitado,
 automaticamente o cliente pode logar e acessar o andamento do projeto vinculado ao CPF dele.
 
 ### Deploy no Heroku
