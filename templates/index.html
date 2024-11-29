@@ -30,22 +30,20 @@
                     </a>                 
                 </div>
                 <div class="d-flex align-items-center">
-                    {% if session.get('user_id') %}
-                        {% if session.get('nivel') == 1 %}
-                            <a href="/admin" class="btn" style="background-color: #ff5733; color: white; margin-right: 15px;">Cotações</a>
-                        {% else %}
-                            <a href="{{ url_for('_projeto', id_cliente=83) }}" 
-                            class="btn" 
-                            style="background-color: #ff5733; color: white; margin-right: 15px;">Acompanhar Projeto
-                            </a>
-                        {% endif %}
-                    {% endif %}
-                    <div>
-                        {% if session.get('user_id') %}
+                    {% if session.get('user_id') is not none %}
+                        <div class="d-flex align-items-center">
+                            {% if session.get('nivel') == 1 %}
+                                <a href="/admin" class="btn" style="background-color: #ff5733; color: white; margin-right: 15px;">Cotações</a>
+                            {% elif session.get('nivel') == 2 %}
+                                <a href="{{ url_for('_projeto', id_cliente=session.get('id_cliente')) }}" 
+                                    class="btn" 
+                                    style="background-color: #ff5733; color: white; margin-right: 15px;">Acompanhar Projeto</a>
+                            {% endif %}
                             <a href="/logout" class="btn" style="background-color: hsl(0, 88%, 56%); color: white;">Sair</a>
-                        {% else %}
-                            <a href="/login" class="btn" style="background-color: hsl(108, 78%, 42%); color: white;">Login</a>
-                        {% endif %}
+                        </div>
+                    {% else %}
+                        <a href="/login" class="btn" style="background-color: hsl(108, 78%, 42%); color: white;">Login</a>
+                    {% endif %}                             
                     </div>
                 </div>
             </div>

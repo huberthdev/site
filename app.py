@@ -1,7 +1,8 @@
 from flask import Flask, request, redirect, url_for, jsonify, render_template, session, flash
 from flask_cors import CORS
 from dotenv import load_dotenv
-import psycopg2, os, re,  logging
+import psycopg2, os, re, logging
+import functions as f
 
 load_dotenv()
 
@@ -40,10 +41,28 @@ def login():
         usuario = request.form.get('usuario')
         senha = request.form.get('senha')
 
-        try:
-            conn = get_db_connection()
-            cursor = conn.cursor()
+        conn = get_db_connection()
+        cursor = conn.cursor()
 
+        try:
+            # Login via CPF
+            if usuario == senha:
+                if f.validar_cpf(usuario):
+                    cursor.execute("""
+                        SELECT a.id_cliente, b.name 
+                        FROM cliente a 
+                        INNER JOIN cotacao b ON a.id_cotacao = b.id
+                        WHERE cpf = %s
+                    """, (usuario,))
+                    cpf = cursor.fetchone()
+                    if cpf:
+                        session['user_id'] = 0
+                        session['nivel'] = 2
+                        session['id_cliente'] = cpf[0]
+                        session['username'] = cpf[1]
+                        return redirect('/')
+
+            # Login via usuário e senha
             cursor.execute("SELECT id, nivel, nome FROM usuarios WHERE usuario = %s AND senha = %s", (usuario, senha))
             user = cursor.fetchone()
 
@@ -52,19 +71,14 @@ def login():
                 session['nivel'] = user[1]
                 session['username'] = user[2]
 
-                if user[1] == 1:  # Administrador
-                    return redirect('/')
-                elif user[1] == 2:  # Cliente
-                    return redirect('/')
-                else:
-                    flash("Nível de acesso inválido.", "error")
-                    return redirect('/login')
+                return redirect('/')
             else:
                 flash("Usuário ou senha incorretos.", "error")
 
         except psycopg2.Error as e:
             logging.error(f"Erro no banco de dados: {e}")
             flash("Erro no banco de dados. Tente novamente mais tarde.", "error")
+
         finally:
             cursor.close()
             conn.close()
@@ -228,10 +242,8 @@ def _projeto(id_cliente):
     cursor = conn.cursor()
 
     if request.method == 'POST':
-        # Obter dados enviados no formulário
         dados = request.form
 
-        # Dados da tabela cotacao
         id_cotacao = dados.get('campo_id_cotacao')  # Já vem do formulário
         name = dados.get('campo_name').strip()
         email = dados.get('campo_email').strip()
@@ -239,36 +251,36 @@ def _projeto(id_cliente):
         description = dados.get('campo_description').strip()
         status = dados.get('campo_status').strip()  # Convertendo para número
 
-        # Dados da tabela cliente
         cpf = re.sub(r'\D', '', dados.get('campo_cpf'))
+        if cpf:
+            if not f.validar_cpf(cpf):
+                flash("CPF inválido. Por favor, insira um CPF válido.", "error")
+                return redirect(request.url) 
+
         endereco = dados.get('campo_endereco').strip()
         cep = re.sub(r'\D', '', dados.get('campo_cep'))
         cidade = dados.get('campo_cidade').strip()
         uf = dados.get('campo_uf').strip()
         observacoes = dados.get('campo_observacoes').strip()
 
-        # Atualizar a tabela cotacao
         cursor.execute("""
             UPDATE cotacao
             SET name = %s, email = %s, phone = %s, description = %s, status = %s
             WHERE id = %s
         """, (name, email, phone, description, status, id_cotacao))
 
-        # Atualizar a tabela cliente
         cursor.execute("""
             UPDATE cliente
             SET cpf = %s, endereco = %s, cep = %s, cidade = %s, uf = %s, observacoes = %s
             WHERE id_cliente = %s
         """, (cpf, endereco, cep, cidade, uf, observacoes, id_cliente))
 
-        # Commit para salvar as alterações
         conn.commit()
-
-        # Fechar a conexão
         cursor.close()
         conn.close()
 
-        # Redirecionar para evitar reenvio do formulário
+        flash("Alterado com sucesso!", "success")
+
         return redirect(url_for('_projeto', id_cliente=id_cliente, salvo=1))
 
     # Consulta para buscar os dados do cliente (GET)

@@ -75,17 +75,14 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error("Formulário não encontrado. Verifique o ID do formulário.");
     }
 
-    if (editForm) {
-        editForm.addEventListener('submit', function (event) {
-            event.preventDefault();
-
-            // Mostra o modal diretamente
-            showModal("Alterado com sucesso!");
-
-            // Envia os dados do formulário usando o método POST padrão
-            event.target.submit();
-        });
-    }
+    document.addEventListener('DOMContentLoaded', function () {
+        const editForm = document.getElementById('form-edicao');
+    
+        if (editForm) {
+            editForm.addEventListener('submit', function (event) {
+            });
+        }
+    });    
 
     function showModal(message) {
         const modal = document.getElementById('successModal');
