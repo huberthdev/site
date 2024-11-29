@@ -188,6 +188,11 @@ def listar_cotacoes():
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
+
+    if 'user_id' not in session:
+        flash("Você precisa estar logado para acessar esta página.", "error")
+        return redirect('/login')
+
     if session.get('nivel') != 1:
         return redirect('/login')
 
@@ -213,6 +218,14 @@ def admin():
 
 @app.route('/excluir/<int:id_cliente>', methods=['POST'])
 def excluir_cliente(id_cliente):
+
+    if 'user_id' not in session:
+        flash("Você precisa estar logado para acessar esta página.", "error")
+        return redirect('/login')
+
+    if session.get('nivel') != 1:
+        return redirect('/login')
+    
     conn = get_db_connection()
     cursor = conn.cursor()
 
@@ -238,18 +251,23 @@ def excluir_cliente(id_cliente):
 
 @app.route('/_projeto/<int:id_cliente>', methods=['GET', 'POST'])
 def _projeto(id_cliente):
+
+    if 'user_id' not in session:
+        flash("Você precisa estar logado para acessar esta página.", "error")
+        return redirect('/login')
+
     conn = get_db_connection()
     cursor = conn.cursor()
 
     if request.method == 'POST':
         dados = request.form
 
-        id_cotacao = dados.get('campo_id_cotacao')  # Já vem do formulário
+        id_cotacao = dados.get('campo_id_cotacao') 
         name = dados.get('campo_name').strip()
         email = dados.get('campo_email').strip()
         phone = dados.get('campo_phone').strip()
         description = dados.get('campo_description').strip()
-        status = dados.get('campo_status').strip()  # Convertendo para número
+        status = dados.get('campo_status').strip()
 
         cpf = re.sub(r'\D', '', dados.get('campo_cpf'))
         if cpf:
@@ -283,7 +301,6 @@ def _projeto(id_cliente):
 
         return redirect(url_for('_projeto', id_cliente=id_cliente, salvo=1))
 
-    # Consulta para buscar os dados do cliente (GET)
     cursor.execute("""
         SELECT 
             a.id_cliente, a.id_cotacao, b.name, b.email, b.phone, b.description, b.status, 
@@ -295,15 +312,13 @@ def _projeto(id_cliente):
     """, (id_cliente,))
     cliente = cursor.fetchone()
 
-    # Consulta para buscar as opções de status
     cursor.execute("SELECT status, descricao FROM status ORDER BY status")
-    status_opcoes = cursor.fetchall()  # Retorna uma lista de tuplas (status, descricao)
+    status_opcoes = cursor.fetchall() 
 
     cursor.close()
     conn.close()
 
     if cliente:
-        # Definir as colunas para o template
         colunas = [
             'id_cliente', 'id_cotacao', 'name', 'email', 'phone', 'description', 'status', 
             'cpf', 'endereco', 'cep', 'cidade', 'uf', 'observacoes', 'data_cadastro'
@@ -312,13 +327,12 @@ def _projeto(id_cliente):
             'cliente.html', 
             cliente=cliente, 
             colunas=colunas, 
-            status_opcoes=status_opcoes,  # Enviar opções de status para o template
-            status_atual=cliente[6],  # Passar o status atual do cliente
+            status_opcoes=status_opcoes,
+            status_atual=cliente[6],
             id_cliente=id_cliente
         )
     else:
-        return "Cliente não encontrado", 404
-
+        return render_template("404.html"), 404
 
 
 if __name__ == '__main__':
