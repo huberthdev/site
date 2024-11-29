@@ -278,7 +278,7 @@ def _projeto(id_cliente):
         endereco = dados.get('campo_endereco').strip()
         cep = re.sub(r'\D', '', dados.get('campo_cep'))
         cidade = dados.get('campo_cidade').strip()
-        uf = dados.get('campo_uf').strip()
+        uf = dados.get('campo_uf').strip().upper()
         observacoes = dados.get('campo_observacoes').strip()
 
         cursor.execute("""

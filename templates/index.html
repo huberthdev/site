@@ -89,20 +89,20 @@
         <h2 class="text-center">Solicite um Orçamento</h2>
         <form id="frmMain" class="mt-4">
             <div class="mb-3">
-                <label for="name" class="form-label">Nome</label>
+                <label for="name" class="form-label">Nome (Obrigatório)</label>
                 <input type="text" id="name" name="name" class="form-control" required>
             </div>
             <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" id="email" name="email" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="phone" class="form-label">Telefone</label>
+                <label for="phone" class="form-label">Telefone (Obrigatório)</label>
                 <input type="tel" id="phone" name="phone" class="form-control" placeholder="(34) 99999-9999" required pattern="\(\d{2}\) \d{4,5}-\d{4}" title="Formato: (34) 99999-9999">
             </div>
             <div class="mb-3">
-                <label for="description" class="form-label">Descrição</label>
-                <textarea id="description" name="description" rows="4" class="form-control resize-none" required></textarea>                
+                <label for="email" class="form-label">Email (Opcional)</label>
+                <input type="email" id="email" name="email" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Descrição (Opcional)</label>
+                <textarea id="description" name="description" rows="4" class="form-control resize-none"></textarea>                
             </div>
             <button type="submit" class="btn btn-primary w-100">Solicitar Orçamento</button>
         </form>

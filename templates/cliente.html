@@ -100,7 +100,16 @@
                             {% if coluna != 'observacoes' %}
                                 <div class="col-md-6 mb-3">
                                     <label for="campo_{{ coluna }}">{{ coluna.replace('_', ' ').capitalize() }}</label>
-                                    {% if coluna == 'status' %}
+                                    {% if coluna == 'uf' %}
+                                        <!-- Campo de seleção para UF, agora com controle de readonly -->
+                                        <select id="campo_uf" name="campo_uf" class="form-select form-control" {% if session.get('nivel') == 2 %}readonly{% endif %}>
+                                            {% for uf in ['MG', 'SP', 'GO'] %}
+                                                <option value="{{ uf }}" {% if cliente[colunas.index('uf')] == uf %}selected{% endif %}>
+                                                    {{ uf }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    {% elif coluna == 'status' %}
                                         <select id="campo_status" name="campo_status" class="form-select form-control {% if session.get('nivel') == 2 %}readonly{% endif %}">
                                             {% for status, descricao in status_opcoes %}
                                                 <option value="{{ status }}" 
@@ -109,6 +118,14 @@
                                                 </option>
                                             {% endfor %}
                                         </select>
+                                    {% elif coluna == 'cep' %}
+                                        <input type="text" id="campo_cep" 
+                                            name="campo_cep" 
+                                            class="form-control {% if session.get('nivel') == 2 %}readonly{% endif %}"
+                                            value="{{ cliente[loop.index0] if cliente[loop.index0] is not none else '' }}"
+                                            maxlength="8"
+                                            pattern="\d*"
+                                            inputmode="numeric" {% if session.get('nivel') == 2 %}readonly{% endif %}>
                                     {% elif coluna == 'cpf' %}
                                         <input type="text" id="campo_cpf" 
                                             name="campo_cpf" 
