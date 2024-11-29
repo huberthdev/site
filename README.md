@@ -35,7 +35,7 @@ requirements.txt: Lista de dependências necessárias para o projeto.
 .env: Configurações de variáveis de ambiente, como credenciais do banco de dados.
 
 ### Funcionalidades
-Funcionalidade 1: [Breve descrição do que ela faz.]
+Solicitar orçamento: [O cliente preenche Nome e Telefone (E-mail e descrição é opcional) e clica no botão Solicitar Orçamento]
 
 Funcionalidade 2: [Breve descrição do que ela faz.]
 
