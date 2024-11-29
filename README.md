@@ -17,12 +17,14 @@
 
 ```bash
 git clone https://github.com/huberthdev/site.git
-cd site
+cd site```
 
 ### Passo 2: Configure o ambiente virtual e instale as dependências
+
+```bash
 python -m venv venv
 venv\Scripts\activate
-pip install -r requirements.txt
+pip install -r requirements.txt```
 
 ### Passo 3: Execute a aplicação
 bash
