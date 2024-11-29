@@ -17,20 +17,18 @@
 
 ```bash
 git clone https://github.com/huberthdev/site.git
-cd site```
+cd site
 
-### Passo 2: Configure o ambiente virtual e instale as dependências
-
-```bash
+```### Passo 2: Configure o ambiente virtual e instale as dependências
 python -m venv venv
 venv\Scripts\activate
-pip install -r requirements.txt```
+pip install -r requirements.txt
 
-### Passo 3: Execute a aplicação
+```### Passo 3: Execute a aplicação
 bash
 python app.py
 
-### Estrutura do Projeto
+```### Estrutura do Projeto
 app.py: Arquivo principal da aplicação.
 
 templates/: Arquivos HTML do projeto.
@@ -41,39 +39,38 @@ requirements.txt: Lista de dependências necessárias para o projeto.
 
 .env: Configurações de variáveis de ambiente, como credenciais do banco de dados.
 
-### Funcionalidades
+```### Funcionalidades
 Funcionalidade 1: [Breve descrição do que ela faz.]
 
 Funcionalidade 2: [Breve descrição do que ela faz.]
 
 Funcionalidade 3: [Breve descrição do que ela faz.]
 
-###Deploy no Heroku
+```### Deploy no Heroku
 Baixe e instale o Heroku CLI em Heroku CLI.
 
 Faça login no Heroku:
 
-bash
+```bash
 heroku login
-Adicione o repositório remoto do Heroku:
 
-bash
+```**Adicione o repositório remoto do Heroku:**
+
 heroku git:remote -a nome-do-seu-app
 Realize o deploy:
 
-bash
+```bash
 git push heroku main
-Links Importantes
+
+```Links Importantes
 Repositório no GitHub: https://github.com/huberthdev/site
 
 Site em produção: http://www.servhidel.com.br
 
 Nota: O domínio deste site foi adquirido no Registro.br.
 
-### Autor
+```### Autor
 
 Huberth Santana da Silva
-
 GitHub: huberthdev
-
 E-mail: huberth.santanaup@outlook.com
