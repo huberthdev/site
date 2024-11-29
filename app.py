@@ -38,7 +38,7 @@ def home():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        usuario = request.form.get('usuario')
+        usuario = request.form.get('usuario').lower()
         senha = request.form.get('senha')
 
         conn = get_db_connection()
