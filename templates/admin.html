@@ -29,6 +29,12 @@
         .content {
             margin-top: 80px; /* Compensando a altura do cabeçalho fixo */
         }
+        @media (max-width: 600px) {
+        .responsive-font a, .responsive-font button {
+            margin-bottom: 5px; /* Um pequeno espaço entre os botões, se necessário */
+            width: 100px; /* Pode ajustar o tamanho para dispositivos menores */
+            }
+        }
     </style>
 </head>
 <body>
@@ -69,12 +75,12 @@
                                             {{ dado }}
                                         </td>
                                     {% endfor %}
-                                    <td class="responsive-font" style="text-align: center;">
-                                        <a href="/_projeto/{{ cliente[0] }}" class="btn btn-warning btn-sm" style="margin-right: 5px; width: 80px;">Editar</a>
+                                    <td class="responsive-font" style="text-align: center; display: flex; justify-content: center;">
+                                        <a href="/_projeto/{{ cliente[0] }}" class="btn btn-warning btn-sm" style="margin-right: 5px; width: 70px; font-size: 12px; padding: 5px 10px;">Editar</a>
                                         <form action="/excluir/{{ cliente[0] }}" method="POST" style="display:inline;" onsubmit="return confirm('Tem certeza de que deseja excluir este cliente?');">
-                                            <button type="submit" class="btn btn-danger btn-sm" style="margin-right: 15px; width: 80px;">Excluir</button>
+                                            <button type="submit" class="btn btn-danger btn-sm" style="margin-right: 15px; width: 70px; font-size: 12px; padding: 5px 10px;">Excluir</button>
                                         </form>
-                                    </td>
+                                    </td>                                    
                                 </tr>
                             {% endfor %}
                         </tbody>
